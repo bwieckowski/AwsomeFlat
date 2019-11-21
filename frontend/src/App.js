@@ -1,16 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 import './App.css';
-import * as DS from './design-system';
+import Input from "./design-system/components/Input/Input";
+import RangeInput from "./design-system/components/RangeInput/RangeInput";
 
-const StyledH1 = styled.h1`
-    color: ${DS.colors.red};
+const Wrapper = styled.div`
+   width: 400px;
+   padding: 10px;
 `;
 
+const StyledInput = styled(Input)`
+  margin: 10px 0;
+`;
 function App() {
   return (
     <div className="App">
-      <StyledH1>elo</StyledH1>
+        <Wrapper>
+
+         <StyledInput placeholder={"imie"} type={"text"} movingPlaceholder={false}/>
+         <StyledInput placeholder={"imie"} type={"text"}/>
+         <StyledInput placeholder={"imie"} type={"text"}  initValue={"testowe dane"}/>
+         <StyledInput placeholder={"piniąszki"} type={"number"}  initValue={"testowe dane"} unit={"zł"}/>
+         <RangeInput unit={"zł"} />
+        </Wrapper>
     </div>
   );
 }
