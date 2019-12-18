@@ -8,37 +8,35 @@ const RangeInput = ({className, unit, initValueMax, initValueMin}) => {
     const [valueMax, setMaxValue] = useState(initValueMax);
 
     const onChangeMinValue = ( event ) => {
-        const currentValue = event.target.value;
+        const currentValue = parseInt(event.target.value);
         if( currentValue > valueMax ) {
             setMinValue(valueMax);
+            event.target.value = valueMax;
         }
         else {
-            setMinValue(valueMax);
+            setMinValue(currentValue);
         }
-        console.log(`min value ${currentValue > valueMax}`)
     };
 
     const onChangeMaxValue = ( event ) => {
-        const currentValue = event.target.value;
+        const currentValue = parseInt(event.target.value);
         if( currentValue < valueMin ) {
             setMaxValue(valueMax);
+            event.target.value = valueMax;
         }
         else {
             setMaxValue(currentValue);
         }
-        console.log('change max value')
     };
 
     return (
         <P.StyledContainer className={className}>
             <P.MinInput
-                initValue={valueMin}
                 placeholder={'od'}
                 movingPlaceholder={false}
                 onChange={onChangeMinValue}
                 type={"number"}/>
             <P.MaxInput
-                initValue={valueMax}
                 placeholder={'do'}
                 movingPlaceholder={false}
                 onChange={onChangeMaxValue}
@@ -52,6 +50,7 @@ RangeInput.defaultProps = {
     initValueMax: '',
     initValueMin: '',
     movingPlaceholder: true,
+    unit: 'zł',
     onChange: ()=>{},
 };
 
@@ -59,7 +58,7 @@ RangeInput.propTypes = {
     type: PropTypes.string,
     initValueMax: PropTypes.any,
     initValueMin: PropTypes.any,
-    unit: PropTypes.string,
+    unit: PropTypes.string.isRequired,
     onChange: PropTypes.func,
     className: PropTypes.string,
 };
