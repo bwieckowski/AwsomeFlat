@@ -9,8 +9,8 @@ const Input = ({ placeholder, type, initValue, unit, movingPlaceholder, classNam
     const [value, setValue] = useState(initValue);
 
     const changeHandler = (event) => {
-        setValue(event.target.value);
         onChange(event);
+        setValue(event.target.value);
     };
 
     return (
