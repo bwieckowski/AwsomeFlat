@@ -3,10 +3,10 @@ export const colors = {
     room: '#CC4B93',
     flat: '#A946BE',
     garage: '#35375A',
-
+    activeGreen: '#52E539',
     button: '#76DDF3',
     buttonHover: '#4DD2F0',
-
+    background:'#EEF4F8',
     dark: '#3D3A3A',
     darker: '#242424',
     black: '#000',
