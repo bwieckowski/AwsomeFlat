@@ -29,6 +29,7 @@ export const Selected = styled.p`
 export const Button = styled.button`
   height: 30px;
   width: 30px;
+  background-color: ${colors.white};
   border:none;
   border-left: solid 1px ${colors.lightestGray};
   border-bottom: solid 1px ${colors.lightestGray};
@@ -39,9 +40,11 @@ export const List = styled.ul`
   display: ${({isOpen}) => isOpen ? 'block' : 'none'};
   max-height: 150px;
   overflow: scroll;
+  background-color: ${colors.white};
   border: 1px solid ${colors.lightestGray};
   border-top: none; 
-  z-index: 5;
+  position: relative;
+  z-index: 10;
 `;
 
 export const ListItem = styled.li`
