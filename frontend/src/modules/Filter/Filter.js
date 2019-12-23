@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as P from './parts'
 import RangeInput from "../../design-system/components/RangeInput/RangeInput";
-import Toggle from "../../design-system/components/Toggle/Toggle";
+import Checkbox from "../../design-system/components/Checkbox/"
 
 const Filter = ({
     districts
@@ -24,11 +24,23 @@ const Filter = ({
                 <P.PriceSection>
                     <P.H2>Cena</P.H2>
                     <RangeInput unit={"zł"} />
-                    <Toggle />
+                    <P.StyledToggle />
                 </P.PriceSection>
                 <P.AreaSection>
                     <P.H2>Powierzchnia</P.H2>
                     <RangeInput unit={"m2"} />
+                </P.AreaSection>
+                <P.AreaSection>
+                    <P.H2>Ograniczenia</P.H2>
+                    <P.StyledCheckbox label={'opcja 1'} onChange={(prop)=>{
+                        console.log(prop);
+                    }} />
+                    <P.StyledCheckbox label={'opcja 2'} onChange={(prop)=>{
+                        console.log(prop);
+                    }} />
+                    <P.StyledCheckbox label={'opcja 3'} onChange={(prop)=>{
+                        console.log(prop);
+                    }} />
                 </P.AreaSection>
         </P.Wrapper>
     );
