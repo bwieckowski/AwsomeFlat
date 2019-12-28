@@ -29,7 +29,7 @@ yarn-error.log*
 # backend
 /backend/.idea
 /backend/vendor
-/backend/src/Config.php
+/backend/src/config.php
 
 # frontend
 /frontend/node_modules
