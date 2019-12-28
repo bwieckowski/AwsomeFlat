@@ -10,17 +10,12 @@ class AdvertisementController{
     }
 
     public function getAdvertisements() {
-
-        if(isset($_GET['city'])){
-            $advertaisments =  $this->advertisementRepository->getAdvertisementsByCity($_GET['city']);
+            $advertisements =  $this->advertisementRepository->getAdvertisementsByParameters($_GET);
             $result = [];
-            foreach ($advertaisments as $advertaisment) {
-               $result[] =  $advertaisment->toArray();
+            foreach ($advertisements as $advertisement) {
+               $result[] =  $advertisement->toArray();
             }
             echo json_encode($result,JSON_UNESCAPED_UNICODE);
         }
-
-       // $this->advertisementRepository->getAllAdvertisements();
-    }
 
 }
