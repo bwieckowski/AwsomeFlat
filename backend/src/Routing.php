@@ -41,8 +41,10 @@ class Routing {
             $object->$action();
         }else{
             $parser = new JsonParser();
+            http_response_code(404);
             $error = ErrorGenerator::generateError("zły path", 404);
             echo $parser->writeToJson($error);
+
         }
     }
 }
