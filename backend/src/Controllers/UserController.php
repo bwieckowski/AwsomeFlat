@@ -12,7 +12,7 @@ class UserController extends Controller{
         }
 
         $email = $_GET['email'];
-        $user = $userRepository->getUser($email);
+        $user = $userRepository->getUserByEmail($email);
         $this->render($user->toJSON());
     }
 

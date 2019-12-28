@@ -5,16 +5,16 @@ require_once 'Price.php';
 
 class Advertisement implements Model
 {
-    private string $id;
-    private string $title;
-    private Localization $localization;
-    private Price $price;
-    private User $user;
-    private float $area;
-    private string $type;
-    private Array $facilities;
-    private Array $images;
-    private string $addedTime;
+    private $id;
+    private $title;
+    private $localization;
+    private $price;
+    private $user;
+    private $area;
+    private $type;
+    private $facilities;
+    private $images;
+    private $addedTime;
 
     /**
      * Advertisement constructor.
@@ -52,7 +52,16 @@ class Advertisement implements Model
         $this->addedTime = $addedTime;
     }
 
-    public function toJSON(){
-        return json_encode(get_object_vars($this),JSON_UNESCAPED_UNICODE);
+    public function toJSON(): string {
+        $advertisement = $this->toArray();
+        return json_encode( $advertisement,JSON_UNESCAPED_UNICODE);
+    }
+
+    public function toArray(): array{
+        $advertisement = get_object_vars($this);
+        $advertisement['localization'] = $this->localization->toArray();
+        $advertisement['user'] = $this->user->toArray();
+        $advertisement['price'] = $this->price->toArray();
+        return $advertisement;
     }
 }

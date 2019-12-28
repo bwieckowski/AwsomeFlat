@@ -19,7 +19,11 @@ class User implements Model {
      * @param $phone
      */
 
-    public function __construct($id, $firstName, $lastName, $email, $phone)
+    public function __construct(string $id,
+                                string $firstName,
+                                string $lastName,
+                                string $email,
+                                string $phone)
     {
         $this->id = $id;
         $this->firstName = $firstName;
@@ -28,7 +32,11 @@ class User implements Model {
         $this->phone = $phone;
     }
 
-    public function toJSON(){
-        return json_encode(get_object_vars($this),JSON_UNESCAPED_UNICODE);
+    public function toJSON(): string{
+        return json_encode(get_object_vars($this), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function toArray(): array{
+        return get_object_vars($this);
     }
 }

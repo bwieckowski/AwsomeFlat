@@ -2,5 +2,6 @@
 
 
 interface Model {
-    public function toJSON();
+    public function toJSON(): string;
+    public function toArray(): array;
 }

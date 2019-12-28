@@ -1,7 +1,7 @@
 <?php
 require_once 'Controllers/index.php';
-require_once 'Utlis/JsonParser.php';
-require_once  'Utlis/ErrorGenerator.php';
+require_once 'Utils/JsonParser.php';
+require_once  'Utils/ErrorGenerator.php';
 
 class Routing {
 
@@ -19,9 +19,9 @@ class Routing {
                 'controller' => 'AuthorizationController',
                 'POST' => 'authorizateUser',
             ],
-            'advertisment' =>[
-                'controller' => 'AdvertismentController',
-                'GET' => 'getAdvertisment',
+            'advertisements' =>[
+                'controller' => 'AdvertisementController',
+                'GET' => 'getAdvertisements',
             ],
         ];
     }

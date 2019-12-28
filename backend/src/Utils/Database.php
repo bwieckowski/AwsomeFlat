@@ -2,10 +2,10 @@
 require_once __DIR__.'/../config.php';
 
 class Database {
-    private string $username;
-    private string $password;
-    private string $host;
-    private string $database;
+    private $username;
+    private $password;
+    private $host;
+    private $database;
 
     public function __construct()
     {

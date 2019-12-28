@@ -1,15 +1,15 @@
 <?php
 
 class Localization implements Model{
-    private string $id;
-    private string $longitude;
-    private string $latitude;
-    private string $street;
-    private string $flatNumber;
-    private string $streetNumber;
-    private string $district;
-    private string $city;
-    private string $postalCode;
+    private $id;
+    private $longitude;
+    private $latitude;
+    private $street;
+    private $flatNumber;
+    private $streetNumber;
+    private $district;
+    private $city;
+    private $postalCode;
 
     /**
      * Localization constructor.
@@ -45,7 +45,11 @@ class Localization implements Model{
     }
 
 
-    public function toJSON(){
+    public function toJSON(): string {
         return json_encode(get_object_vars($this),JSON_UNESCAPED_UNICODE);
+    }
+
+    public function toArray(): array{
+        return get_object_vars($this);
     }
 }

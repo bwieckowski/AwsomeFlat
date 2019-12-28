@@ -2,10 +2,10 @@
 
 
 class Price implements Model {
-    private string $id;
-    private float $price;
-    private bool $areMediaIncluded;
-    private float $commission;
+    private $id;
+    private $price;
+    private $areMediaIncluded;
+    private $commission;
 
     /**
      * Price constructor.
@@ -26,7 +26,12 @@ class Price implements Model {
     }
 
 
-    public function toJSON(){
+    public function toJSON(): string {
         return json_encode(get_object_vars($this),JSON_UNESCAPED_UNICODE);
+    }
+
+
+    public function toArray(): array{
+        return get_object_vars($this);
     }
 }
