@@ -1,0 +1,10 @@
+insert into User (first_name, last_name) values ('Bartek', 'Więckowski');
+insert into User (first_name, last_name) values ('Jan', 'Kowalski');
+insert into User (first_name, last_name) values ('Noelyn', 'Lowdeane');
+insert into User (first_name, last_name) values ('Ansell', 'Ceillier');
+insert into User (first_name, last_name) values ('Alic', 'Hannigan');
+insert into User (first_name, last_name) values ('Claudianus', 'Coombs');
+insert into User (first_name, last_name) values ('Kinnie', 'Tettley');
+insert into User (first_name, last_name) values ('Karoly', 'Plenderleith');
+insert into User (first_name, last_name) values ('Pearl', 'Jenman');
+insert into User (first_name, last_name) values ('Hashim', 'Hickisson');

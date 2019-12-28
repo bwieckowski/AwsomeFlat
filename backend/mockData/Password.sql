@@ -1,0 +1,10 @@
+insert into Password (password, id_user) values ('f865b53623b121fd34ee5426c792e5c33af8c227', 1);
+insert into Password (password, id_user) values ('f865b53623b121fd34ee5426c792e5c33af8c227', 2);
+insert into Password (password, id_user) values ('f865b53623b121fd34ee5426c792e5c33af8c227', 3);
+insert into Password (password, id_user) values ('f865b53623b121fd34ee5426c792e5c33af8c227', 4);
+insert into Password (password, id_user) values ('f865b53623b121fd34ee5426c792e5c33af8c227', 5);
+insert into Password (password, id_user) values ('f865b53623b121fd34ee5426c792e5c33af8c227', 6);
+insert into Password (password, id_user) values ('f865b53623b121fd34ee5426c792e5c33af8c227', 7);
+insert into Password (password, id_user) values ('f865b53623b121fd34ee5426c792e5c33af8c227', 8);
+insert into Password (password, id_user) values ('f865b53623b121fd34ee5426c792e5c33af8c227', 9);
+insert into Password (password, id_user) values ('f865b53623b121fd34ee5426c792e5c33af8c227', 10);

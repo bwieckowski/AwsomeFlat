@@ -1,0 +1,5 @@
+insert into Localization (latitude, longitude, street, flat_number, street_number, postal_code, id_district) values ('50.0931308', '19.9651002836538', 'Powstańców', '45', '26', '31-422', 21);
+insert into Localization (latitude, longitude, street, flat_number, street_number, postal_code, id_district) values ('50.0147272','19.9184367', 'Żywiecka', '26', '40', '30-427', 27);
+insert into Localization (latitude, longitude, street, flat_number, street_number, postal_code, id_district) values ('50.0582946','19.9706805', 'Grzegórzecka', '85', '61', '31-559', 20);
+insert into Localization (latitude, longitude, street, flat_number, street_number, postal_code, id_district) values ('50.050411','19.943268', 'Józefa', '12', '4', '31-056', 19);
+insert into Localization (latitude, longitude, street, flat_number, street_number, postal_code, id_district) values ('	50.07813715','19.8841032714585', 'Na Błonie', '19', '13b', '30-147', 24);
