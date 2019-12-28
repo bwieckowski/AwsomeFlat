@@ -11,8 +11,8 @@ class LocalizationRepository extends Repository {
                         street, 
                         flat_number, 
                         street_number,
-                        D.name as city,
-                        C.name as district,
+                        C.name as city,
+                        D.name as district,
                         postal_code 
                     from Localization 
                     inner join District D on Localization.id_district = D.id
