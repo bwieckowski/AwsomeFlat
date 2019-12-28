@@ -1,36 +1,66 @@
 <?php
 require_once __DIR__.'/../Models/Localization.php';
+require_once __DIR__.'/../Utils/QueryBuilder/QueryBuilder.php';
 
 class LocalizationRepository extends Repository {
 
-    public function getLocalizationById( string $id ):? Localization{
+    public function getLocalizationByParameters(array $parameters )
+    {
+        $qb = new QueryBuilder();
+        try {
+            $query = $qb
+                ->select()
+                ->addColumns([
+                    'id' => 'Localization.id',
+                    'longitude',
+                    'latitude',
+                    'street',
+                    'street_number',
+                    'flat_number',
+                    'city' => 'City.name',
+                    'district' => 'District.name',
+                    'postal_code'
+                ])
+                ->addTable('Localization')
+                ->innerJoin('District', 'id', 'id_district')
+                ->innerJoin('City', 'id', 'id_city', "District")
+                ->equals('City.name', $parameters['city'])
+                ->equals("District.name", $parameters['district'])
+                ->equals("Localization.id", $parameters['id'])
+                ->end();
+            return $this->createLocalizationsByQuery($query);
 
-        $query = ' Select Localization.id, 
-                        longitude, 
-                        latitude, 
-                        street, 
-                        flat_number, 
-                        street_number,
-                        C.name as city,
-                        D.name as district,
-                        postal_code 
-                    from Localization 
-                    inner join District D on Localization.id_district = D.id
-                    inner join City C on D.id_city = C.id
-                    where Localization.id = :id ';
+        }catch (Error $error) {
+            return null;
+        }
 
-        $bindObject = new BindObject(':id', $id, PDO::PARAM_STR);
-        $loca = $this->getExecutedStatement($query, array($bindObject))[0];
-
-        return new Localization( $loca['id'],
-                                 $loca['longitude'],
-                                 $loca['latitude'],
-                                 $loca['street'],
-                                 $loca['flat_number'],
-                                 $loca['street_number'],
-                                 $loca['district'],
-                                 $loca['city'],
-                                 $loca['postal_code'],
-                                );
     }
+
+    private function getLocalizationFromQueryResult($localization){
+        return new Localization( $localization['id'],
+            $localization['longitude'],
+            $localization['latitude'],
+            $localization['street'],
+            $localization['flat_number'],
+            $localization['street_number'],
+            $localization['district'],
+            $localization['city'],
+            $localization['postal_code'],
+        );
+    }
+
+    private function createLocalizationsByQuery($query, $bindObjects = null){
+        $localizations = $this->getExecutedStatement($query, $bindObjects);
+        if($localizations === false) {
+            throw new Error('','');
+        }
+
+        $result = [];
+        foreach ($localizations as $localization){
+            $result[] =$this->getLocalizationFromQueryResult($localization);
+        }
+        return $result;
+    }
+
+
 }
