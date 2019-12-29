@@ -6,6 +6,8 @@ require_once 'PriceRepository.php';
 require_once __DIR__ . '/../Models/ErrorResponse.php';
 require_once  __DIR__.'/../Utils/BindObject.php';
 require_once __DIR__.'/../Models/Advertisement.php';
+require_once __DIR__.'/../Models/Localization.php';
+require_once __DIR__.'/../Models/User.php';
 require_once  __DIR__.'/../Utils/QueryBuilder/QueryBuilder.php';
 
 class AdvertisementRepository extends Repository {
@@ -35,14 +37,31 @@ class AdvertisementRepository extends Repository {
                     'id_price',
                     'area',
                     'type' => 'Property_type.name',
+                    'longitude'=>'Localization.longitude',
+                    'latitude'=>'Localization.latitude',
+                    'street' => 'Localization.street',
+                    'postalCode' => 'Localization.postal_code',
+                    'flatNumber' => 'Localization.flat_number',
+                    'streetNumber' => 'Localization.street_number',
+                    'district' => 'District.name',
+                    'city' => 'City.name',
                     'id_localization',
-                    'id_user'
+                    'userId'=>'Contact_information.id_user',
+                    'firstName'=>'first_name',
+                    'lastName'=>'last_name',
+                    'email',
+                    'phoneNumber'=>'phone_number',
+                    'priceId' => 'Price.id',
+                    'price',
+                    'areMediaIncluded' => 'are_media_included',
+                    'commission'
                 ])
                 ->addTable('Advertisement')
                 ->innerJoin('Property_type', 'id', 'id_property_type')
                 ->innerJoin('Localization', 'id', 'id_localization')
                 ->innerJoin('Price', 'id', 'id_price')
                 ->innerJoin('User', 'id', 'id_user')
+                ->innerJoin('Contact_information', 'id_user', 'id','User')
                 ->innerJoin('District', 'id', 'id_district',"Localization")
                 ->innerJoin('City', 'id', 'id_city',"District")
                 ->equals('City.name', $parameters['city'])
@@ -63,9 +82,33 @@ class AdvertisementRepository extends Repository {
 
 
     private function getAdvertisementFromQueryResult($advertisement ): Advertisement {
-        $user = $this->userRepository->getUserByParameters(['id'=>$advertisement['id_user']])[0];
-        $localization = $this->localizationRepository->getLocalizationByParameters(['id'=>$advertisement['id_localization']])[0];
-        $price = $this->priceRepository->getPriceById($advertisement['id_price']);
+
+        $price = new Price(
+            $advertisement['priceId'],
+            $advertisement['price'],
+            $advertisement['areMediaIncluded'],
+            $advertisement['commission']
+        );
+
+        $user = new User(
+            $advertisement['userId'],
+            $advertisement['firstName'],
+            $advertisement['lastName'],
+            $advertisement['email'],
+            $advertisement['phoneNumber'],
+        );
+
+        $localization = new Localization(
+            $advertisement['id_localization'],
+            $advertisement['longitude'],
+            $advertisement['latitude'],
+            $advertisement['street'],
+            $advertisement['flatNumber'],
+            $advertisement['streetNumber'],
+            $advertisement['district'],
+            $advertisement['city'],
+            $advertisement['postalCode']
+        );
 
         return  new Advertisement(
             $advertisement['id'],
