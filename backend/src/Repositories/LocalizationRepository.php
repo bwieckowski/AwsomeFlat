@@ -30,8 +30,8 @@ class LocalizationRepository extends Repository {
                 ->end();
             return $this->createLocalizationsByQuery($query);
 
-        }catch (Error $error) {
-            return null;
+        } catch(ErrorResponse $exception) {
+            return $exception;
         }
 
     }
@@ -52,7 +52,7 @@ class LocalizationRepository extends Repository {
     private function createLocalizationsByQuery($query, $bindObjects = null){
         $localizations = $this->getExecutedStatement($query, $bindObjects);
         if($localizations === false) {
-            throw new Error('','');
+            throw new ErrorResponse('Brak danych w bazie');
         }
 
         $result = [];

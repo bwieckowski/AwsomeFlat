@@ -27,7 +27,7 @@ class Price implements Model {
 
 
     public function toJSON(): string {
-        return json_encode(get_object_vars($this),JSON_UNESCAPED_UNICODE);
+        return json_encode($this->toArray(),JSON_UNESCAPED_UNICODE);
     }
 
 

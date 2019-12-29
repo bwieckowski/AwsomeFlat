@@ -38,7 +38,7 @@ class SelectQueryBuilder implements IQueryBuilder
 
     public function innerJoin($connectingTable, $connectingTableId, $originalTableId, $originalTable = null){
         if($this->table === null)
-            throw new Error('you must connecting table first - use addTable method');
+            throw new ErrorResponse('you must connecting table first - use addTable method');
 
         if( $originalTable === null)
             $originalTable = $this->table;

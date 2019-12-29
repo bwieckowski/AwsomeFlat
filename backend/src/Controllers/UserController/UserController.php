@@ -16,7 +16,7 @@ class UserController extends Controller{
             echo json_encode($result, JSON_UNESCAPED_UNICODE);
         }
         else
-            $this->render('{}');
+            $this->render('[]');
     }
 
 }

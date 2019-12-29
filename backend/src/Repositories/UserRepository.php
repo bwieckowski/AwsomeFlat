@@ -37,8 +37,8 @@ class UserRepository extends Repository {
                 ->end();
             return $this->createUserFromQuery($query);
 
-        } catch( Error $exception ){
-            return null;
+        } catch( ErrorResponse $exception ){
+            return $exception;
         }
 
     }
@@ -60,7 +60,7 @@ class UserRepository extends Repository {
         $users = $this->getExecutedStatement($query, $bindObjects, PDO::PARAM_STR);
 
         if($users === false) {
-            throw new Error('','');
+            throw new ErrorResponse('Brak danych w bazie');
         }
 
         $result = [];

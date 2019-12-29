@@ -3,6 +3,7 @@
 require_once 'UserRepository.php';
 require_once 'LocalizationRepository.php';
 require_once 'PriceRepository.php';
+require_once __DIR__ . '/../Models/ErrorResponse.php';
 require_once  __DIR__.'/../Utils/BindObject.php';
 require_once __DIR__.'/../Models/Advertisement.php';
 require_once  __DIR__.'/../Utils/QueryBuilder/QueryBuilder.php';
@@ -21,19 +22,6 @@ class AdvertisementRepository extends Repository {
         $this->priceRepository = new PriceRepository();
     }
 
-
-    function getAdvertisementById( string $id){
-        $query = '
-            SELECT * FROM Advertisement 
-            inner join Property_type Pt on Advertisement.id_property_type = Pt.id
-            inner join Localization L on Advertisement.id_localization = L.id
-            inner join Price P on Advertisement.id_price = P.id
-            inner join User U on Advertisement.id_user = U.id
-            WHERE Advertisement.id = :id;
-        ';
-        $bindObject = new BindObject(':id', $id, PDO::PARAM_STR);
-        return $this->createAdvertisementByQuery($query, $bindObject);
-    }
 
     public function getAdvertisementsByParameters( $parameters ){
         $qb = new QueryBuilder();
@@ -68,8 +56,8 @@ class AdvertisementRepository extends Repository {
                 ->between("Price.price",$parameters['price_between1'],$parameters['price_between2'])
                 ->end();
             return $this->createAdvertisementByQuery($query);
-        } catch( Error $exception){
-            return null;
+        } catch( ErrorResponse $exception){
+            return $exception;
         }
     }
 
@@ -96,7 +84,7 @@ class AdvertisementRepository extends Repository {
     private function createAdvertisementByQuery($query, $bindObjects = null){
         $advertisements = $this->getExecutedStatement($query, $bindObjects);
         if($advertisements === false) {
-            throw new Error('','');
+            throw new ErrorResponse('Brak danych w bazie');
         }
         $result = [];
         foreach ($advertisements as $advertisement){
