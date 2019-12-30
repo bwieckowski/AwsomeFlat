@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as P from './parts'
-import RangeInput from "../../design-system/components/RangeInput/RangeInput";
-import Checkbox from "../../design-system/components/Checkbox/"
+import RangeInput from "design-system/components/RangeInput/RangeInput";
 
 const Filter = ({
     districts

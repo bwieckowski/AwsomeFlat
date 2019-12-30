@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import {colors} from "../../";
-import {shadows} from "../../";
-
+import {colors, shadows} from "design-system";
 
 export const StyledContainer = styled.div`
   position:relative;
@@ -41,4 +39,4 @@ export const UnitLabel = styled.div`
   align-items: center;
   margin-left: 13px;
   color: ${colors.gray}
-`
+`;
