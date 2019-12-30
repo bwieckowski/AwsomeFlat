@@ -62,6 +62,13 @@ class Advertisement implements Model
         $advertisement['localization'] = $this->localization->toArray();
         $advertisement['user'] = $this->user->toArray();
         $advertisement['price'] = $this->price->toArray();
+
+        $results = [];
+        foreach ( $this->facilities as $facility) {
+            $results[] = $facility->toArray();
+        }
+        $advertisement['facilities'] = $results;
+
         return $advertisement;
     }
 }

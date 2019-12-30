@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__."/../Repositories/AdvertisementRepository.php";
+require_once __DIR__."/../Repositories/AdvertisementRepository/AdvertisementRepository.php";
 require_once  __DIR__.'/../Models/Advertisement.php';
 
 class AdvertisementController{

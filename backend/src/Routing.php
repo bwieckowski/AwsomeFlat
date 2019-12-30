@@ -19,6 +19,10 @@ class Routing {
                 'controller' => 'AuthorizationController',
                 'POST' => 'authorizateUser',
             ],
+            'facilities' =>[
+                'controller' => 'AdvertisementController',
+                'GET' => 'getFacilities',
+            ],
             'advertisements' =>[
                 'controller' => 'AdvertisementController',
                 'GET' => 'getAdvertisements',

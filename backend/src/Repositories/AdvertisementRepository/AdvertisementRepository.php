@@ -1,61 +1,21 @@
 <?php
-
-require_once 'UserRepository.php';
-require_once 'LocalizationRepository.php';
-require_once 'PriceRepository.php';
-require_once __DIR__ . '/../Models/ErrorResponse.php';
-require_once  __DIR__.'/../Utils/BindObject.php';
-require_once __DIR__.'/../Models/Advertisement.php';
-require_once __DIR__.'/../Models/Localization.php';
-require_once __DIR__.'/../Models/User.php';
-require_once  __DIR__.'/../Utils/QueryBuilder/QueryBuilder.php';
+require_once __DIR__ . '/../../Models/ErrorResponse.php';
+require_once __DIR__.'/../../Utils/BindObject.php';
+require_once __DIR__.'/../../Models/Advertisement.php';
+require_once __DIR__.'/../../Models/Localization.php';
+require_once __DIR__.'/../../Models/User.php';
+require_once __DIR__.'/../../Utils/QueryBuilder/QueryBuilder.php';
+require_once __DIR__ . '/../FacilitiesRepository.php';
+require_once 'constants.php';
 
 class AdvertisementRepository extends Repository {
-
-    private $userRepository;
-    private $localizationRepository;
-    private $priceRepository;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->userRepository = new UserRepository();
-        $this->localizationRepository = new LocalizationRepository();
-        $this->priceRepository = new PriceRepository();
-    }
-
 
     public function getAdvertisementsByParameters( $parameters ){
         $qb = new QueryBuilder();
         try {
             $query = $qb
                 ->select()
-                ->addColumns([
-                    'id' => 'Advertisement.id',
-                    'added_time',
-                    'title',
-                    'id_price',
-                    'area',
-                    'type' => 'Property_type.name',
-                    'longitude'=>'Localization.longitude',
-                    'latitude'=>'Localization.latitude',
-                    'street' => 'Localization.street',
-                    'postalCode' => 'Localization.postal_code',
-                    'flatNumber' => 'Localization.flat_number',
-                    'streetNumber' => 'Localization.street_number',
-                    'district' => 'District.name',
-                    'city' => 'City.name',
-                    'id_localization',
-                    'userId'=>'Contact_information.id_user',
-                    'firstName'=>'first_name',
-                    'lastName'=>'last_name',
-                    'email',
-                    'phoneNumber'=>'phone_number',
-                    'priceId' => 'Price.id',
-                    'price',
-                    'areMediaIncluded' => 'are_media_included',
-                    'commission'
-                ])
+                ->addColumns(advertisement_columns_name)
                 ->addTable('Advertisement')
                 ->innerJoin('Property_type', 'id', 'id_property_type')
                 ->innerJoin('Localization', 'id', 'id_localization')
@@ -82,6 +42,8 @@ class AdvertisementRepository extends Repository {
 
 
     private function getAdvertisementFromQueryResult($advertisement ): Advertisement {
+        $facilitiesRepository = new FacilitiesRepository();
+        $facilities = $facilitiesRepository->getFacilitiesByAdvertisementId($advertisement['id']);
 
         $price = new Price(
             $advertisement['priceId'],
@@ -118,7 +80,7 @@ class AdvertisementRepository extends Repository {
             $user,
             $advertisement['area'],
             $advertisement['type'],
-            array(),
+            $facilities,
             array(),
             $advertisement['added_time']
         );
