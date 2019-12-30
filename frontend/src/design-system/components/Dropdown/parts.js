@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {colors} from "../../";
+import {colors} from "design-system";
 
 
 export const RotateContainer = styled.div`

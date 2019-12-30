@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import './App.css';
-import Input from "./design-system/components/Input/Input";
-import RangeInput from "./design-system/components/RangeInput/RangeInput";
-import Dropdown from "./design-system/components/Dropdown";
-import Toggle from "./design-system/components/Toggle/Toggle";
-import Filter from "./modules/Filter/Filter";
-import {colors} from './design-system'
+import Input from "design-system/components/Input/Input";
+import RangeInput from "design-system/components/RangeInput/RangeInput";
+import Dropdown from "design-system/components/Dropdown";
+import Toggle from "design-system/components/Toggle/Toggle";
+import Filter from "modules/Filter/Filter";
+import {colors} from 'design-system'
 
 const Wrapper = styled.div`
    width: 400px;

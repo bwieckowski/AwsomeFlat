@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import * as P from './parts';
-import { ReactComponent as Arrow} from '../../../assets/arrow.svg';
+import { ReactComponent as Arrow} from 'assets/arrow.svg';
 
 const Dropdown = ({optionList, onChange, className}) => {
     const [ current, setCurrent ] = useState( optionList[0] );

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import Input from "../../design-system/components/Input/Input";
-import Dropdown from "../../design-system/components/Dropdown";
-import {colors} from '../../design-system'
-import Toggle from "../../design-system/components/Toggle/Toggle";
-import Checkbox from "../../design-system/components/Checkbox";
+import Input from "design-system/components/Input/Input";
+import Dropdown from "design-system/components/Dropdown";
+import {colors} from 'design-system'
+import Toggle from "design-system/components/Toggle/Toggle";
+import Checkbox from "design-system/components/Checkbox";
 
 export const Wrapper = styled.div`
   width: 380px;
