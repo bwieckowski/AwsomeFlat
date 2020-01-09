@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Col renders the heading 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+@media (min-width:320px) {
+  .c0 {
+    width: 100%;
+  }
+}
+
+@media (min-width:400px) {
+  .c0 {
+    width: 200%;
+  }
+}
+
+@media (min-width:768px) {
+  .c0 {
+    width: 100%;
+  }
+}
+
+@media (min-width:992px) {
+  .c0 {
+    width: 300%;
+  }
+}
+
+@media (min-width:1200px) {
+  .c0 {
+    width: 100%;
+  }
+}
+
+@media (min-width:1900px) {
+  .c0 {
+    width: NaN%;
+  }
+}
+
+@media (min-width:768px) {
+  .c0 {
+    padding: 20px;
+  }
+}
+
+<div
+  className="c0"
+  sizes={
+    Array [
+      1,
+      2,
+      1,
+      3,
+      1,
+    ]
+  }
+/>
+`;
