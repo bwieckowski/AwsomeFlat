@@ -1,7 +1,7 @@
 import Playground from './Playground';
-import MapPage from './MapPage';
+import MapPageView from 'views/MapPageView';
 
 export {
     Playground,
-    MapPage
+    MapPageView
 }

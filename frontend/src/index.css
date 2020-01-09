@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.leaflet-div-icon{
+  border:none !important;
+  background-color: transparent!important;
+}
+

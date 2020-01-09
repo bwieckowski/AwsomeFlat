@@ -5,6 +5,7 @@ import RangeInput from "design-system/components/RangeInput/RangeInput";
 import Dropdown from "design-system/components/Dropdown";
 import Toggle from "design-system/components/Toggle/Toggle";
 import Filter from "modules/Filter/Filter";
+import FlatItem from 'modules/FlatList/FlatItem/FlatItem';
 import {colors} from 'design-system'
 
 const Wrapper = styled.div`
@@ -35,16 +36,17 @@ const dropDownCallback = (item) => {
 
 const Playground = () =>{
     return (
-        <Wrapper>
-             <StyledInput placeholder={"imie"} type={"text"} movingPlaceholder={false}/>
-             <StyledInput placeholder={"imie"} type={"text"}/>
-             <StyledInput placeholder={"imie"} type={"text"}  initValue={"testowe dane"}/>
-             <StyledInput placeholder={"piniąszki"} type={"number"} unit={"zł"}/>
-             <StyledRangeInput unit={"zł"} />
-             <StyledDropdown onChange={dropDownCallback} optionList={['item1', 'item2', 'item3']} />
-             <StyledToggle onChange={(state) => { console.log(state)}}/>
-         <Filter/>
-        </Wrapper>
+            <Wrapper>
+                <FlatItem/>
+                 <StyledInput placeholder={"imie"} type={"text"} movingPlaceholder={false}/>
+                 <StyledInput placeholder={"imie"} type={"text"}/>
+                 <StyledInput placeholder={"imie"} type={"text"}  initValue={"testowe dane"}/>
+                 <StyledInput placeholder={"piniąszki"} type={"number"} unit={"zł"}/>
+                 <StyledRangeInput unit={"zł"} />
+                 <StyledDropdown onChange={dropDownCallback} optionList={['item1', 'item2', 'item3']} />
+                 <StyledToggle onChange={(state) => { console.log(state)}}/>
+             <Filter/>
+            </Wrapper>
     )
 };
 
