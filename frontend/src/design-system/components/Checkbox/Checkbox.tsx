@@ -1,8 +1,13 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import * as P from './parts';
+import * as P from 'design-system/components/Checkbox/parts';
 
-const Checkbox = ( {className, label, onChange}) => {
+interface CheckboxProps {
+    className?: string,
+    label: string,
+    onChange: ( isChecked: boolean)=>void ,
+}
+
+const Checkbox: React.FC<CheckboxProps> = ( {className, label, onChange}) => {
     const [isChecked, setChecked] = useState(false);
 
     const toggleChecked = () => {
@@ -24,10 +29,4 @@ Checkbox.defaultProps = {
     label: '',
     className: '',
     onChange: () => {},
-};
-
-Checkbox.propTypes = {
-    className: PropTypes.string,
-    label: PropTypes.string,
-    onChange: PropTypes.func,
 };

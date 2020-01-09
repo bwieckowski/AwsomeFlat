@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import {colors, shadows} from "design-system";
+import {colors, shadows} from "design-system/index";
 
-export const StyledContainer = styled.div`
+export const StyledContainer = styled.div<{ isUnit: boolean; }>`
   position:relative;
   width: 100%;
   padding-right: ${({isUnit}) => isUnit ? '0' : '26px'};  
@@ -15,7 +15,7 @@ export const StyledWrapper = styled.div`
 `;
 
 
-export const StyledLabel = styled.label`
+export const StyledLabel = styled.label<{ isClicked: boolean; }>`
     color: ${colors.lightestGray};
     position: absolute;
     bottom: 8px; 

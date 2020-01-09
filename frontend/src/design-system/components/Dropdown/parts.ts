@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import {colors} from "design-system";
+import {colors} from "../../colors";
 
-
-export const RotateContainer = styled.div`
+export const RotateContainer = styled.div<{isOpen: boolean}>`
     transition: transform 0.2s;
     transform: ${({isOpen}) => isOpen ? 'rotate(180deg)' : 'rotate(0)'};
 `;
@@ -36,7 +35,7 @@ export const Button = styled.button`
   outline: none;
 `;
 
-export const List = styled.ul`
+export const List = styled.ul<{isOpen: boolean}>`
   display: ${({isOpen}) => isOpen ? 'block' : 'none'};
   max-height: 150px;
   overflow: scroll;

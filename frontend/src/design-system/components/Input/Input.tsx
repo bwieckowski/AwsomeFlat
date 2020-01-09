@@ -1,21 +1,30 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import * as P from './parts';
+import * as P from 'design-system/components/Input/parts';
 
-const Input = ({ placeholder, type, initValue, unit, movingPlaceholder, className, onChange }) => {
+interface InputProps {
+    placeholder?: string;
+    type?: string;
+    initValue?: string | number;
+    unit?: string;
+    movingPlaceholder?: boolean;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    className?: string;
+}
 
-    const itHasNoEmptyValue = ( value ) => !!value;
+const Input: React.FC<InputProps> = ({ placeholder, type, initValue, unit, movingPlaceholder, className, onChange }) => {
+
+    const itHasNoEmptyValue = ( value: string | number | undefined ) => !!value;
     const [ clicked, setClicked ] = useState(itHasNoEmptyValue(initValue));
     const [value, setValue] = useState(initValue);
 
-    const changeHandler = (event) => {
-        onChange(event);
+    const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        onChange && onChange(event);
         setValue(event.target.value);
     };
 
     return (
         <P.StyledWrapper className={className}>
-            <P.StyledContainer isUnit={unit}>
+            <P.StyledContainer isUnit={(!!unit)} >
                 <P.StyledInput
                     value={value}
                     type={type}
@@ -36,14 +45,5 @@ Input.defaultProps = {
     onChange: ()=>{},
 };
 
-Input.propTypes = {
-    placeholder: PropTypes.string,
-    type: PropTypes.string,
-    initValue: PropTypes.any,
-    unit: PropTypes.string,
-    movingPlaceholder: PropTypes.bool,
-    onChange: PropTypes.func,
-    className: PropTypes.string,
-};
 
 export default Input;
