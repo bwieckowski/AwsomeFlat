@@ -1,4 +1,4 @@
-import Playground from './Playground';
+import Playground from 'views/Playground';
 import MapPageView from 'views/MapPageView';
 
 export {

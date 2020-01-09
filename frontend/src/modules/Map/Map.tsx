@@ -1,9 +1,14 @@
 import React from 'react'
-import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
-import * as C from './constants';
+import {Map as LeafletMap, Marker, Popup, TileLayer} from 'react-leaflet';
+import { icons } from './constants';
 
-class Map extends React.Component {
+interface MapProps {
+    className?: string;
+}
+
+class Map extends React.Component<MapProps> {
     render() {
+        console.log(icons['apartment']);
         return (
             <LeafletMap
                 className={this.props.className}
@@ -22,7 +27,10 @@ class Map extends React.Component {
                 <TileLayer
                     url='https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}'
                 />
-                <Marker position={[50.093131, 19.965100]} icon={C.icons[3]}>
+                <Marker
+                    position={[50.093131, 19.965100]}
+                    icon={icons['room']}
+                >
                     <Popup>
                         Popup for any custom information.
                     </Popup>

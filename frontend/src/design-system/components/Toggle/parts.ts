@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {colors, shadows} from '../../';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{state: boolean}>`
   height: 30px;
   width: 50px;
   background-color: ${ ({state}) => state ? colors.activeGreen : colors.lightestGray};
@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   cursor: pointer;
 `;
 
-export const Dot = styled.div`
+export const Dot = styled.div<{state: boolean}>`
   width: 26px;
   height: 26px;
   background-color: ${colors.white};

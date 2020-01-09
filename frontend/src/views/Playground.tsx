@@ -30,8 +30,8 @@ const StyledToggle = styled(Toggle)`
   margin: 10px 0;
 `;
 
-const dropDownCallback = (item) => {
-    console.log(item.target.innerHTML);
+const dropDownCallback = (item: React.MouseEvent<HTMLElement,MouseEvent>) => {
+    console.log(item.target);
 };
 
 const Playground = () =>{
@@ -42,7 +42,7 @@ const Playground = () =>{
                  <StyledInput placeholder={"imie"} type={"text"}/>
                  <StyledInput placeholder={"imie"} type={"text"}  initValue={"testowe dane"}/>
                  <StyledInput placeholder={"piniąszki"} type={"number"} unit={"zł"}/>
-                 <StyledRangeInput unit={"zł"} />
+                 <StyledRangeInput  type={"number"} unit={"zł"} />
                  <StyledDropdown onChange={dropDownCallback} optionList={['item1', 'item2', 'item3']} />
                  <StyledToggle onChange={(state) => { console.log(state)}}/>
              <Filter/>

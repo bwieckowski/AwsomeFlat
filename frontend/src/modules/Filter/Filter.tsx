@@ -1,10 +1,15 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
-import * as P from './parts'
+import * as P from 'modules/Filter/parts'
 import RangeInput from "design-system/components/RangeInput/RangeInput";
 
-const Filter = ({
+
+interface FilterProps {
+    districts?: Array<string>;
+    className?: string;
+}
+
+const Filter: React.FC<FilterProps> = ({
     districts,
     className,
 }) => {
@@ -17,21 +22,21 @@ const Filter = ({
                 <P.LocalizationSection>
                     <P.H2>Lokalizacja</P.H2>
                     <P.StyledInput placeholder={"Miasto"} type={"text"}/>
-                    <P.StyledDropdown optionList={districts}/>
+                    <P.StyledDropdown optionList={districts ? districts : []}/>
                 </P.LocalizationSection>
                 <P.LocalizationSection>
                     <P.H2>Typ nieruchomości</P.H2>
                     <P.StyledInput placeholder={"Miasto"} type={"text"}/>
-                    <P.StyledDropdown optionList={districts}/>
+                    <P.StyledDropdown optionList={districts ? districts : []}/>
                 </P.LocalizationSection>
                 <P.PriceSection>
                     <P.H2>Cena</P.H2>
-                    <RangeInput unit={"zł"} />
+                    <RangeInput type={"number"} unit={"zł"} />
                     <P.StyledToggle />
                 </P.PriceSection>
                 <P.AreaSection>
                     <P.H2>Powierzchnia</P.H2>
-                    <RangeInput unit={"m2"} />
+                    <RangeInput type={"number"} unit={"m2"} />
                 </P.AreaSection>
                 <P.AreaSection>
                     <P.H2>Ograniczenia</P.H2>
@@ -47,16 +52,6 @@ const Filter = ({
                 </P.AreaSection>
         </P.Wrapper>
     );
-};
-
-
-Filter.defaultProps = {
-    districts: [], 
-};
-
-Filter.propTypes = {
-    districts: PropTypes.array,
-    className: PropTypes.string,
 };
 
 export default Filter;

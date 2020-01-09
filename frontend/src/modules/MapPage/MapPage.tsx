@@ -1,5 +1,5 @@
 import React from 'react';
-import * as P from './parts';
+import * as P from 'modules/MapPage/parts';
 
 const MapPage = () =>{
 

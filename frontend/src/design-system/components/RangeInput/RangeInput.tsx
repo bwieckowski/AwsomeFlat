@@ -1,28 +1,42 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import * as P from './parts';
 
-const RangeInput = ({className, unit, initValueMax, initValueMin}) => {
 
-    const [valueMin, setMinValue] = useState(initValueMin);
-    const [valueMax, setMaxValue] = useState(initValueMax);
+interface RangeInputProps {
+    type: string,
+    initValueMax?: number,
+    initValueMin?: number,
+    unit?: string,
+    onChange?: () => void,
+    className?: string,
+}
 
-    const onChangeMinValue = ( event ) => {
+const RangeInput: React.FC<RangeInputProps> = ({
+    className,
+    unit = "zł",
+    initValueMax = 10,
+    initValueMin = 0
+}) => {
+
+    const [valueMin, setMinValue] = useState<number>(initValueMin);
+    const [valueMax, setMaxValue] = useState<number>(initValueMax);
+
+    const onChangeMinValue = ( event: React.ChangeEvent<HTMLInputElement> ) => {
         const currentValue = parseInt(event.target.value);
         if( currentValue > valueMax ) {
             setMinValue(valueMax);
-            event.target.value = valueMax;
+            event.target.value = valueMax.toString();
         }
         else {
             setMinValue(currentValue);
         }
     };
 
-    const onChangeMaxValue = ( event ) => {
+    const onChangeMaxValue = ( event: React.ChangeEvent<HTMLInputElement> ) => {
         const currentValue = parseInt(event.target.value);
         if( currentValue < valueMin ) {
             setMaxValue(valueMax);
-            event.target.value = valueMax;
+            event.target.value = valueMax.toString();
         }
         else {
             setMaxValue(currentValue);
@@ -44,23 +58,6 @@ const RangeInput = ({className, unit, initValueMax, initValueMin}) => {
                 unit={unit}/>
         </P.StyledContainer>
     )
-};
-
-RangeInput.defaultProps = {
-    initValueMax: '',
-    initValueMin: '',
-    movingPlaceholder: true,
-    unit: 'zł',
-    onChange: ()=>{},
-};
-
-RangeInput.propTypes = {
-    type: PropTypes.string,
-    initValueMax: PropTypes.any,
-    initValueMin: PropTypes.any,
-    unit: PropTypes.string.isRequired,
-    onChange: PropTypes.func,
-    className: PropTypes.string,
 };
 
 export default RangeInput;

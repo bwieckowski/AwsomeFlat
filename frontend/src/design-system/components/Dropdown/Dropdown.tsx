@@ -3,18 +3,28 @@ import PropTypes from 'prop-types';
 import * as P from './parts';
 import { ReactComponent as Arrow} from 'assets/arrow.svg';
 
-const Dropdown = ({optionList, onChange, className}) => {
-    const [ current, setCurrent ] = useState( optionList[0] );
+interface DropdownProps {
+    optionList: Array<string>;
+    onChange?: (event: React.MouseEvent<HTMLElement,MouseEvent>) => void;
+    className?: string;
+}
+
+const Dropdown: React.FC<DropdownProps> = ({optionList, onChange, className}) => {
+    const [ current, setCurrent ] = useState<string>( optionList[0] );
     const [ isOpen, setOpen ] = useState(false);
 
     const toggleList = () => {
         setOpen( !isOpen );
     };
 
-    const onChangeItem = ( event ) => {
-        setCurrent( event.target.innerHTML );
-        onChange(event);
-        setOpen(false);
+    const onChangeItem = ( event: React.MouseEvent<HTMLElement,MouseEvent>  ) => {
+        const target = event.target;
+        if (target instanceof HTMLInputElement) {
+            setCurrent( target.value );
+            onChange && onChange(event);
+            setOpen(false);
+        }
+
     };
 
     return (

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {colors} from "design-system";
+import {colors} from "../../colors";
 import { ReactComponent as Checked } from 'assets/checked.svg';
 
 export const Wrapper = styled.div`
@@ -18,7 +18,7 @@ export const Box = styled.div`
   margin-right: 5px;
 `;
 
-export const StyledChecked = styled(Checked)`
+export const StyledChecked = styled(Checked)<{isChecked: boolean}>`
   display: ${({isChecked}) => isChecked ? 'block' : 'none'};
 `;
 
