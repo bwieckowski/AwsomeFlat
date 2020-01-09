@@ -3,7 +3,8 @@ import {colors, shadows} from "design-system";
 
 export const StyledContainer = styled.div`
   position:relative;
-    width: 100%;
+  width: 100%;
+  padding-right: ${({isUnit}) => isUnit ? '0' : '26px'};  
 `;
 
 export const StyledWrapper = styled.div`
@@ -17,7 +18,7 @@ export const StyledWrapper = styled.div`
 export const StyledLabel = styled.label`
     color: ${colors.lightestGray};
     position: absolute;
-    bottom: 10px; 
+    bottom: 8px; 
     transform: translateY(${({isClicked}) => isClicked ? '-18px' : '0' })
     scale(${({isClicked}) => isClicked ? '0.8' : '1' });
     left: 16px;
@@ -26,7 +27,7 @@ export const StyledLabel = styled.label`
 `;
 
 export const StyledInput = styled.input`
-  padding: 12px 16px;
+  padding: 8px;
   width: 100%;
   outline: none;  
   box-shadow: ${shadows.black01};

@@ -15,7 +15,7 @@ const Input = ({ placeholder, type, initValue, unit, movingPlaceholder, classNam
 
     return (
         <P.StyledWrapper className={className}>
-            <P.StyledContainer>
+            <P.StyledContainer isUnit={unit}>
                 <P.StyledInput
                     value={value}
                     type={type}
