@@ -1,14 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import * as P from './parts'
 import RangeInput from "design-system/components/RangeInput/RangeInput";
 
 const Filter = ({
-    districts
+    districts,
+    className,
 }) => {
-
+    useEffect(()=>{
+        axios.get('http://localhost:8080/user').then((resp) => {console.log(resp)})
+    },[]);
     return(
-        <P.Wrapper>
+        <P.Wrapper className={className} >
             <P.H1>Filtry</P.H1>
                 <P.LocalizationSection>
                     <P.H2>Lokalizacja</P.H2>
@@ -47,11 +51,12 @@ const Filter = ({
 
 
 Filter.defaultProps = {
-    districts: [],
+    districts: [], 
 };
 
 Filter.propTypes = {
     districts: PropTypes.array,
+    className: PropTypes.string,
 };
 
 export default Filter;

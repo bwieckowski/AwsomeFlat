@@ -21,6 +21,7 @@ export const H1 = styled.h1`
     font-weight: 500;
     margin-bottom: 7px;
     padding-top: 22px;
+    text-align: center;
 `;
 
 export const H2 = styled.h2`
@@ -32,7 +33,7 @@ export const H2 = styled.h2`
 `;
 
 export const Section = styled.div`
-  margin: 40px 0 0 37px; 
+  margin: 24px 0 0 37px; 
   text-align: left;
 `;
 
@@ -46,16 +47,16 @@ export const PriceSection = styled(Section)`
 
 export const AreaSection = styled(Section)`
   width: 220px;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
 `;
 
 
 export const StyledInput = styled(Input)`
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 `;
 
 export const StyledDropdown = styled(Dropdown)`
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 `;
 
 export const StyledCheckbox = styled(Checkbox)`
