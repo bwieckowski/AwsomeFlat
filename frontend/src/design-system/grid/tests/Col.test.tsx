@@ -1,7 +1,7 @@
 import * as React from "react";
-import * as renderer from "react-test-renderer"
-import ColWrapper from "design-system/grid/Col"
-import 'jest-styled-components'
+import * as renderer from "react-test-renderer";
+import ColWrapper from "design-system/grid/Col";
+import 'jest-styled-components';
 
 describe("Col", () => {
     it("renders the heading", () => {
