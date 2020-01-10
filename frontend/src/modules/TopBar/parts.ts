@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import {colors, shadows} from 'design-system';
+import {colors, media, shadows} from 'design-system';
 import {Link} from 'react-router-dom';
-import {media } from 'design-system';
+import {BreakpointsName} from "../../design-system/grid/media";
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -15,13 +15,12 @@ export const Wrapper = styled.div`
 `;
 
 export const LogoWrapper = styled.div`
-  
 `;
 
 export const LinksWrapper = styled.ul`
    display: none;
    
-  ${media.from('tablet')}{
+  ${media.from(BreakpointsName.tablet)}{
     display: block;
   }
 
@@ -35,7 +34,7 @@ export const LinkItem = styled.li`
 export const HamburgerWrapper = styled.div`
   display: block;
    
-  ${media.from('tablet')}{
+  ${media.from(BreakpointsName.tablet)}{
     display: none;
   }
 `;
