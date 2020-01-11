@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+    "baseUrl": "./src",
+        "paths": {
+            "design-system/*": ["src/design-system/*"],
+            "modules/*": ["src/modules/*"],
+            "assets/*": ["src/assets/*"],
+            "views/*": ["src/views/*"]
+    }
+},
+    "exclude": ["node_modules", "build", "coverage", "dist", "lib"]
+}
