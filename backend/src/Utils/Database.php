@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/../config.php';
+require_once __DIR__.'/../Models/ErrorResponse.php';
 
 class Database {
     private $username;
@@ -29,7 +30,8 @@ class Database {
             return $conn;
         }
         catch(PDOException $e) {
-            die("Connection failed: " . $e->getMessage());
+            $error = new ErrorResponse($e->getMessage(),404);
+            die( $error->toJSON() );
         }
     }
 }
