@@ -18,6 +18,10 @@ const routes = [
         path: '/playground',
         component: V.Playground,
     },
+    {
+        path: '/login',
+        component: V.LoginView,
+    }
 ];
 
 function App() {

@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import * as P from './parts'
 
-
 interface ToggleProps {
     className?: string,
     initialState?: boolean,
@@ -9,9 +8,9 @@ interface ToggleProps {
 }
 
 const Toggle: React.FC<ToggleProps> = ({
-onChange,
-initialState = false,
-className
+    onChange,
+    className,
+    initialState = false,
 }) => {
     const [state, setState] = useState<boolean>( initialState );
     const toggle = () => {
@@ -20,7 +19,11 @@ className
         onChange && onChange(tmpState);
     };
     return (
-        <P.Wrapper state={state} className={className} onClick={toggle}>
+        <P.Wrapper
+            state={state}
+            className={className}
+            onClick={toggle}
+        >
             <P.Dot state={state} />
         </P.Wrapper>
     )

@@ -5,7 +5,7 @@ import {BreakpointsName} from "../../design-system/grid/media";
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 100px;
+  height: 60px;
   background-color: ${colors.white};
   display: flex;
   justify-content: space-between;
@@ -14,8 +14,7 @@ export const Wrapper = styled.div`
   box-shadow: ${shadows.black04};
 `;
 
-export const LogoWrapper = styled.div`
-`;
+export const LogoWrapper = styled.div``;
 
 export const LinksWrapper = styled.ul`
    display: none;
@@ -23,7 +22,6 @@ export const LinksWrapper = styled.ul`
   ${media.from(BreakpointsName.tablet)}{
     display: block;
   }
-
 `;
 
 export const LinkItem = styled.li`

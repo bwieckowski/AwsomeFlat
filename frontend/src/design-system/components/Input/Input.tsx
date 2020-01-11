@@ -23,20 +23,22 @@ const Input: React.FC<InputProps> = ({ placeholder, type, initValue, unit, movin
     };
 
     return (
-        <P.StyledWrapper className={className}>
-            <P.StyledContainer isUnit={(!!unit)} >
-                <P.StyledInput
-                    value={value}
-                    type={type}
-                    onChange={changeHandler}
-                    placeholder={ movingPlaceholder ? undefined : placeholder}
-                    onFocus={()=>{setClicked(true)} }
-                    onBlur={()=>{setClicked(itHasNoEmptyValue(value))}}
-                />
-                {movingPlaceholder && (<P.StyledLabel isClicked={clicked}>{placeholder}</P.StyledLabel>)}
-            </P.StyledContainer>
+        <>
+            <P.StyledWrapper className={className}>
+                <P.StyledContainer isUnit={(!!unit)} >
+                    <P.StyledInput
+                        value={value}
+                        type={type}
+                        onChange={changeHandler}
+                        placeholder={ movingPlaceholder ? undefined : placeholder}
+                        onFocus={()=>{setClicked(true)} }
+                        onBlur={()=>{setClicked(itHasNoEmptyValue(value))}}
+                    />
+                    {movingPlaceholder && (<P.StyledLabel isClicked={clicked}>{placeholder}</P.StyledLabel>)}
+                </P.StyledContainer>
+            </P.StyledWrapper>
             { unit && (<P.UnitLabel>{ unit }</P.UnitLabel>) }
-        </P.StyledWrapper>
+        </>
     )
 };
 Input.defaultProps = {

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import axios from 'axios';
-import * as P from 'modules/Filter/parts'
+import * as P from 'modules/MapPage/Filter/parts'
 import RangeInput from "design-system/components/RangeInput/RangeInput";
 
 
