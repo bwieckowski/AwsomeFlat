@@ -1,12 +1,17 @@
 <?php
 require_once __DIR__ . '/../Utils/Database.php';
 require_once __DIR__ . '/../Utils/BindObject.php';
+require_once __DIR__.'/../Models/index.php';
+require_once __DIR__.'/../Utils/QueryBuilder/QueryBuilder.php';
+
 class Repository {
-    protected $database;
+    private $database;
+    protected $queryBuilder;
 
     public function __construct()
     {
         $this->database = new Database();
+        $this->queryBuilder = new QueryBuilder();
     }
 
     protected function getExecutedStatement(string $query, array $bindObjects = null, int $data_type = PDO::FETCH_ASSOC ){
@@ -17,7 +22,19 @@ class Repository {
                 $stmt->bindParam($bindObject->getParameter(), $bindObject->getVariable(), $bindObject->getDataType());
             }
 
-        $stmt->execute();
+        $executeWasCorrect = $stmt->execute();
+        if($executeWasCorrect === false) {
+            throw new ErrorResponse('Brak danych w bazie');
+        }
+
         return $stmt->fetchAll($data_type);
+    }
+
+    protected  function getObjectFromDatabaseResult($objectFromDB, $function){
+        $result = [];
+        foreach ( $objectFromDB as $databaseResult){
+            $result[] = $this->$function($databaseResult);
+        }
+        return $result;
     }
 }

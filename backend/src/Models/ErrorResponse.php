@@ -27,9 +27,6 @@ class ErrorResponse extends Exception implements Model {
     }
 
     public function toArray(): array{
-        $array = get_object_vars($this);
-        unset($array['file']);
-        unset($array['line']);
-        return $array;
+        return get_object_vars($this);
     }
 }
