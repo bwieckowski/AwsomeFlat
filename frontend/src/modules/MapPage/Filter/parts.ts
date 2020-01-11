@@ -25,7 +25,7 @@ export const H1 = styled.h1`
 `;
 
 export const H2 = styled.h2`
-    font-weight: bold;
+    font-weight: 500;
     font-size: 14px;
     line-height: 17px;
     margin-bottom: 20px;
@@ -34,19 +34,22 @@ export const H2 = styled.h2`
 
 export const Section = styled.div`
   margin: 24px 0 0 37px; 
+  padding-right: 20px;
   text-align: left;
 `;
 
+export const TypeSection = styled(Section)`
+
+`;
+
 export const LocalizationSection = styled(Section)`
-  width: 135px;
+padding-right: 150px;
 `;
 
 export const PriceSection = styled(Section)`
-  width: 220px;
 `;
 
 export const AreaSection = styled(Section)`
-  width: 220px;
   padding-bottom: 20px;
 `;
 

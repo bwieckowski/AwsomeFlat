@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import {colors, shadows} from "design-system/index";
+import {colors} from "../../colors";
+import {shadows} from "../../shadows";
 
 export const StyledContainer = styled.div<{ isUnit: boolean; }>`
   position:relative;
   width: 100%;
-  padding-right: ${({isUnit}) => isUnit ? '0' : '26px'};  
 `;
 
 export const StyledWrapper = styled.div`
@@ -18,11 +18,12 @@ export const StyledWrapper = styled.div`
 export const StyledLabel = styled.label<{ isClicked: boolean; }>`
     color: ${colors.lightestGray};
     position: absolute;
-    bottom: 8px; 
+    bottom: 4px; 
     transform: translateY(${({isClicked}) => isClicked ? '-18px' : '0' })
     scale(${({isClicked}) => isClicked ? '0.8' : '1' });
     left: 16px;
     background-color: ${colors.white};
+    cursor: text;
     transition: transform 0.2s ease-in-out;
 `;
 
