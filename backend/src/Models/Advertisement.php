@@ -1,17 +1,11 @@
 <?php
+require_once 'BasicAdvertisement.php';
 require_once 'User.php';
-require_once 'Localization.php';
-require_once 'Price.php';
 
-class Advertisement implements Model
+class Advertisement extends BasicAdvertisement
 {
-    private $id;
-    private $title;
-    private $localization;
-    private $price;
+
     private $user;
-    private $area;
-    private $type;
     private $facilities;
     private $images;
     private $addedTime;
@@ -29,24 +23,27 @@ class Advertisement implements Model
      * @param array $images
      * @param string $addedTime
      */
+
     public function __construct(string $id,
                                 string $title,
                                 Localization $localization,
                                 Price $price,
-                                User $user,
                                 float $area,
                                 string $type,
+                                User $user,
                                 array $facilities,
                                 array $images,
                                 string $addedTime)
     {
-        $this->id = $id;
-        $this->title = $title;
-        $this->localization = $localization;
-        $this->price = $price;
+        parent::__construct(
+            $id,
+            $title,
+            $localization,
+            $price,
+            $area,
+            $type,
+        );
         $this->user = $user;
-        $this->area = $area;
-        $this->type = $type;
         $this->facilities = $facilities;
         $this->images = $images;
         $this->addedTime = $addedTime;

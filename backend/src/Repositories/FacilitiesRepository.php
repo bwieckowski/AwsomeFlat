@@ -20,7 +20,8 @@ class FacilitiesRepository extends Repository {
                 ->addTable("Facilities")
                 ->equals("id", $params['id'])
                 ->end();
-            return $this->createFacilitiesByQuery($query);
+            $resultFromDb = $this->getExecutedStatement($query);
+            return $this->getFacilityFromQueryResult($resultFromDb);
         } catch ( ErrorResponse $exception){
             return $exception;
         }
@@ -35,26 +36,15 @@ class FacilitiesRepository extends Repository {
                 ->equals("id_advertisement", $facilitiesId)
                 ->end();
 
-            return $this->createFacilitiesByQuery($query);
+            $resultFromDb = $this->getExecutedStatement($query);
+            return $this->getObjectFromDatabaseResult($resultFromDb, 'getFacilityFromQueryResult');
         } catch ( ErrorResponse $exception){
             return $exception;
         }
     }
 
-    private function getFacilityFromQueryResult($facility){
+
+    protected function getFacilityFromQueryResult($facility){
         return new Facility( $facility['id'], $facility['name'] );
-    }
-
-    private function createFacilitiesByQuery($query){
-        $facilities = $this->getExecutedStatement($query);
-        if($facilities === false) {
-            throw new ErrorResponse('Brak danych w bazie');
-        }
-
-        $result = [];
-        foreach ($facilities as $facility){
-            $result[] =$this->getFacilityFromQueryResult($facility);
-        }
-        return $result;
     }
 }

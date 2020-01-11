@@ -27,6 +27,10 @@ class Routing {
                 'controller' => 'AdvertisementController',
                 'GET' => 'getAdvertisements',
             ],
+            'basicAdvertisements' =>[
+                'controller' => 'AdvertisementController',
+                'GET' => 'getBasicAdvertisements',
+            ],
         ];
     }
 

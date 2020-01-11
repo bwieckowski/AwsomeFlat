@@ -16,6 +16,15 @@ class AdvertisementController{
                $result[] =  $advertisement->toArray();
             }
             echo json_encode($result,JSON_UNESCAPED_UNICODE);
+    }
+
+    public function getBasicAdvertisements() {
+        $advertisements =  $this->advertisementRepository->getBasicAdvertisementsByParameters($_GET);
+        $result = [];
+        foreach ($advertisements as $advertisement) {
+            $result[] =  $advertisement->toArray();
         }
+        echo json_encode($result,JSON_UNESCAPED_UNICODE);
+    }
 
 }
