@@ -4,16 +4,26 @@ require_once __DIR__.'/../Models/Price.php';
 class PriceRepository extends Repository {
 
     public function getPriceById( string $id ):? Price{
+        try {
+            $query = $this->queryBuilder
+                ->select()
+                ->addColumns(['*'])
+                ->addTable('Price')
+                ->equals('id', $id);
 
-        $query = 'Select *from Price where id = :id';
+            $resultFromDb = $this->getExecutedStatement($query);
+            return $this->getObjectFromDatabaseResult($resultFromDb, 'getLocalizationFromQueryResult');
+        } catch( ErrorResponse $error){
+            die( $error->getMessage() );
+        }
+    }
 
-        $bindObject = new BindObject(':id', $id, PDO::PARAM_STR);
-        $price = $this->getExecutedStatement($query, array($bindObject))[0];
-
+    private function getPriceFromQueryResult($price){
         return new Price(
             $price['id'],
             $price['price'],
             $price['are_media_included'],
             $price['commission']);
     }
+
 }

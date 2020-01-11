@@ -7,25 +7,28 @@ require_once 'Repository.php';
 
 class UserRepository extends Repository {
 
-    public function getUserById(string $id): ?User{
-        $qb = new QueryBuilder();
-        $query = $qb
-            ->select()
-            ->addColumns(['*'])
-            ->addTable('Contact_information')
-            ->innerJoin('User','id','id_user')
-            ->where()
-            ->equals('User.id',':id')
-            ->end();
+    public function getUserById(string $id): array
+    {
+        try {
+            $query = $this->queryBuilder
+                ->select()
+                ->addColumns(['*'])
+                ->addTable('Contact_information')
+                ->innerJoin('User', 'id', 'id_user')
+                ->where()
+                ->equals('User.id', ':id')
+                ->end();
 
-        $bindObject = new BindObject(':id', $id, PDO::PARAM_STR);
-        return $this->createUserFromQuery($query, array($bindObject));
+            $resultFromDb = $this->getExecutedStatement($query);
+            return $this->getObjectFromDatabaseResult($resultFromDb, 'getUserFromQueryResult');
+        } catch( ErrorResponse $response){
+            die( $response->getMessage() );
+        }
     }
 
     public  function getUserByParameters(array $parameters){
-        $qb = new QueryBuilder();
         try {
-            $query = $qb
+            $query = $this->queryBuilder
                 ->select()
                 ->addColumns(['*'])
                 ->addTable('Contact_information')
@@ -35,46 +38,40 @@ class UserRepository extends Repository {
                 ->equals("User.last_name", $parameters['lastName'])
                 ->equals("email",$parameters['email'])
                 ->end();
-            return $this->createUserFromQuery($query);
+            $resultFromDb = $this->getExecutedStatement($query);
+            return $this->getObjectFromDatabaseResult($resultFromDb, 'getUserFromQueryResult');
 
         } catch( ErrorResponse $exception ){
             return $exception;
         }
-
     }
 
-    public function getUserByEmail(string $email): ?User
+    public function getUserByEmail(string $email): array
     {
-        $query = '
-            SELECT * FROM Contact_information 
-            inner join User
-            on Contact_information.id_user = User.id
-            WHERE email = :email;
-        ';
+        $qb = new QueryBuilder();
+        try {
+            $query = $qb
+                ->select()
+                ->addColumns(['*'])
+                ->addTable('Contact_information')
+                ->innerJoin('User', 'id', 'id_user')
+                ->equals('email', $email)
+                ->end();
+            $resultFromDb = $this->getExecutedStatement($query);
+            return $this->getObjectFromDatabaseResult($resultFromDb, 'getUserFromQueryResult');
 
-        $bindObject = new BindObject(':email', $email, PDO::PARAM_STR);
-        return $this->createUserFromQuery($query, array($bindObject));
+        } catch( ErrorResponse $exception ){
+            return $exception;
+        }
     }
 
-    private function createUserFromQuery($query, $bindObjects = null){
-        $users = $this->getExecutedStatement($query, $bindObjects, PDO::PARAM_STR);
-
-        if($users === false) {
-            throw new ErrorResponse('Brak danych w bazie');
-        }
-
-        $result = [];
-        foreach ($users as $user){
-            $result[] = new User(
-                $user['id'],
-                $user['first_name'],
-                $user['last_name'],
-                $user['email'],
-                $user['phone_number'],
-            );
-        }
-
-        return $result;
-
+    public function getUserFromQueryResult($user){
+       return new User(
+            $user['id'],
+            $user['first_name'],
+            $user['last_name'],
+            $user['email'],
+            $user['phone_number']
+       );
     }
 }
