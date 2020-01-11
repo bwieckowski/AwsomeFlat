@@ -9,9 +9,8 @@ class UserRepository extends Repository {
 
     public function getUserById(string $id): array
     {
-        $qb = new QueryBuilder();
         try {
-            $query = $qb
+            $query = $this->queryBuilder
                 ->select()
                 ->addColumns(['*'])
                 ->addTable('Contact_information')
@@ -28,9 +27,8 @@ class UserRepository extends Repository {
     }
 
     public  function getUserByParameters(array $parameters){
-        $qb = new QueryBuilder();
         try {
-            $query = $qb
+            $query = $this->queryBuilder
                 ->select()
                 ->addColumns(['*'])
                 ->addTable('Contact_information')

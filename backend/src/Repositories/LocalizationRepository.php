@@ -6,9 +6,8 @@ class LocalizationRepository extends Repository {
 
     public function getLocalizationByParameters(array $parameters )
     {
-        $qb = new QueryBuilder();
         try {
-            $query = $qb
+            $query = $this->queryBuilder
                 ->select()
                 ->addColumns([
                     'id' => 'Localization.id',

@@ -6,16 +6,10 @@ require_once __DIR__.'/../Utils/QueryBuilder/QueryBuilder.php';
 
 class FacilitiesRepository extends Repository {
 
-    private $qb;
-
-    public function __construct(){
-        parent::__construct();
-        $this->qb = new QueryBuilder();
-    }
-
     public function getFacilitiesByParams( $params ){
         try{
-            $query = $this->qb->select()
+            $query = $this->queryBuilder
+                ->select()
                 ->addColumns(['id','name'])
                 ->addTable("Facilities")
                 ->equals("id", $params['id'])
@@ -29,7 +23,8 @@ class FacilitiesRepository extends Repository {
 
     public function getFacilitiesByAdvertisementId( $facilitiesId ){
         try{
-            $query = $this->qb->select()
+            $query = $this->queryBuilder
+                ->select()
                 ->addColumns(['id'=>'Facilities.id','name'])
                 ->addTable("Advertisement_Facilities")
                 ->innerJoin("Facilities","id","id_facilities")

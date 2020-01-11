@@ -4,16 +4,14 @@ require_once __DIR__.'/../../Utils/BindObject.php';
 require_once __DIR__.'/../../Models/Advertisement.php';
 require_once __DIR__.'/../../Models/Localization.php';
 require_once __DIR__.'/../../Models/User.php';
-require_once __DIR__.'/../../Utils/QueryBuilder/QueryBuilder.php';
 require_once __DIR__ . '/../FacilitiesRepository.php';
 require_once 'constants.php';
 
 class AdvertisementRepository extends Repository {
 
     public function getBasicAdvertisementsByParameters( $parameters ){
-        $qb = new QueryBuilder();
         try {
-            $query = $qb
+            $query = $this->queryBuilder
                 ->select()
                 ->addColumns(basic_advertisement_columns_name)
                 ->addTable('Advertisement')
