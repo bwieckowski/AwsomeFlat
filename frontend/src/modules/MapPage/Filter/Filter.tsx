@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import axios from 'axios';
 import * as P from 'modules/MapPage/Filter/parts'
 import RangeInput from "design-system/components/RangeInput/RangeInput";
-
+import {ApartmentButton, FlatButton, GarageButton, RoomButton} from "../../../design-system/components/Buttons/Buttons";
 
 interface FilterProps {
     districts?: Array<string>;
@@ -24,11 +24,13 @@ const Filter: React.FC<FilterProps> = ({
                     <P.StyledInput placeholder={"Miasto"} type={"text"}/>
                     <P.StyledDropdown optionList={districts ? districts : []}/>
                 </P.LocalizationSection>
-                <P.LocalizationSection>
+                <P.TypeSection>
                     <P.H2>Typ nieruchomości</P.H2>
-                    <P.StyledInput placeholder={"Miasto"} type={"text"}/>
-                    <P.StyledDropdown optionList={districts ? districts : []}/>
-                </P.LocalizationSection>
+                    <ApartmentButton/>
+                    <FlatButton/>
+                    <RoomButton/>
+                    <GarageButton/>
+                </P.TypeSection>
                 <P.PriceSection>
                     <P.H2>Cena</P.H2>
                     <RangeInput type={"number"} unit={"zł"} />
@@ -36,7 +38,7 @@ const Filter: React.FC<FilterProps> = ({
                 </P.PriceSection>
                 <P.AreaSection>
                     <P.H2>Powierzchnia</P.H2>
-                    <RangeInput type={"number"} unit={"m2"} />
+                    <RangeInput type={"number"} unit={`m2` } />
                 </P.AreaSection>
                 <P.AreaSection>
                     <P.H2>Ograniczenia</P.H2>

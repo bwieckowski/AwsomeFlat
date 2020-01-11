@@ -23,6 +23,7 @@ export const StyledLabel = styled.label<{ isClicked: boolean; }>`
     scale(${({isClicked}) => isClicked ? '0.8' : '1' });
     left: 16px;
     background-color: ${colors.white};
+    cursor: text;
     transition: transform 0.2s ease-in-out;
 `;
 

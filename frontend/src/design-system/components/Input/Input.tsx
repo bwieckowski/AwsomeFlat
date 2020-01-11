@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import * as P from 'design-system/components/Input/parts';
 
 interface InputProps {
@@ -15,11 +15,21 @@ const Input: React.FC<InputProps> = ({ placeholder, type, initValue, unit, movin
 
     const itHasNoEmptyValue = ( value: string | number | undefined ) => !!value;
     const [ clicked, setClicked ] = useState(itHasNoEmptyValue(initValue));
+
     const [value, setValue] = useState(initValue);
+    const inputRef = useRef(null);
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange && onChange(event);
         setValue(event.target.value);
+    };
+
+    const labelClick = () =>{
+        setClicked(true);
+        if(inputRef && inputRef.current) {
+            // @ts-ignore
+            inputRef.current.focus();
+        }
     };
 
     return (
@@ -30,11 +40,12 @@ const Input: React.FC<InputProps> = ({ placeholder, type, initValue, unit, movin
                         value={value}
                         type={type}
                         onChange={changeHandler}
+                        ref={inputRef}
                         placeholder={ movingPlaceholder ? undefined : placeholder}
                         onFocus={()=>{setClicked(true)} }
                         onBlur={()=>{setClicked(itHasNoEmptyValue(value))}}
                     />
-                    {movingPlaceholder && (<P.StyledLabel isClicked={clicked}>{placeholder}</P.StyledLabel>)}
+                    {movingPlaceholder && (<P.StyledLabel onClick={ labelClick } isClicked={clicked}>{placeholder}</P.StyledLabel>)}
                 </P.StyledContainer>
             </P.StyledWrapper>
             { unit && (<P.UnitLabel>{ unit }</P.UnitLabel>) }

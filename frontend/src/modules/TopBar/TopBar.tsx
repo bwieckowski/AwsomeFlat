@@ -7,14 +7,13 @@ import {Link} from "react-router-dom";
 const TopBar = () =>{
 
     const links = [
-
         {
             title: 'Wystaw Ofertę',
             href: '/'
         },
         {
             title: 'Załóż konto',
-            href: '/'
+            href: '/register'
         },
         {
             title: 'Zaloguj',

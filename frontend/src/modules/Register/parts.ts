@@ -41,7 +41,7 @@ export const StyledButton = styled.button`
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-export const LoginInput = styled(Input)`
+export const RegisterInput = styled(Input)`
   margin-top: 20px;
   
   ${StyledInput} {

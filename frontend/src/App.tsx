@@ -19,6 +19,10 @@ const routes = [
         component: V.Playground,
     },
     {
+        path: '/register',
+        component: V.RegisterView,
+    },
+    {
         path: '/login',
         component: V.LoginView,
     }

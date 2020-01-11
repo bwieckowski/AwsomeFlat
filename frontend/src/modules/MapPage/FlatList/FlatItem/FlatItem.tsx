@@ -1,30 +1,30 @@
 import React from 'react';
 import * as P from 'modules/MapPage/FlatList/FlatItem/parts';
+import {FlatBasic} from "api/apiModels";
 
-interface FlatItem {
-    title: string;
-    price: number;
-    area: number;
-    img: string;
-}
 
-const FlatItem: React.FC<FlatItem> = ({
+const FlatItem: React.FC<FlatBasic> = ({
     title,
     price,
     area,
-    img
+    type,
+    miniPhoto
 }) =>(
     <P.Wrapper>
         <P.ImageWrapper>
-            <P.Image src={img} alt={"pokoj"} />
+            <P.Image src={miniPhoto} alt={"pokoj"} />
         </P.ImageWrapper>
         <P.InfoWrapper>
             <P.HeaderWrapper>
-                { title }
+                <P.Title>{ title }</P.Title>
+                <P.SubTitle>
+                    <P.Type>{type}</P.Type>
+                    <P.P>Pokaż na mapie</P.P>
+                </P.SubTitle>
             </P.HeaderWrapper>
             <P.ParametersWrapper>
-                <P.Parameter>{price}</P.Parameter>
-                <P.Parameter>{area}</P.Parameter>
+                <P.Parameter><P.StyledMoney />{price} zł/ msc</P.Parameter>
+                <P.Parameter><P.StyledRuler />{area} m<sup>2</sup></P.Parameter>
             </P.ParametersWrapper>
         </P.InfoWrapper>
     </P.Wrapper>
