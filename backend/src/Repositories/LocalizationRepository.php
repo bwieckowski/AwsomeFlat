@@ -28,7 +28,8 @@ class LocalizationRepository extends Repository {
                 ->equals("District.name", $parameters['district'])
                 ->equals("Localization.id", $parameters['id'])
                 ->end();
-            return $this->createLocalizationsByQuery($query);
+            $resultFromDb = $this->getExecutedStatement($query);
+            return $this->getObjectFromDatabaseResult($resultFromDb, 'getLocalizationFromQueryResult');
 
         } catch(ErrorResponse $exception) {
             return $exception;
@@ -47,19 +48,6 @@ class LocalizationRepository extends Repository {
             $localization['city'],
             $localization['postal_code'],
         );
-    }
-
-    private function createLocalizationsByQuery($query, $bindObjects = null){
-        $localizations = $this->getExecutedStatement($query, $bindObjects);
-        if($localizations === false) {
-            throw new ErrorResponse('Brak danych w bazie');
-        }
-
-        $result = [];
-        foreach ($localizations as $localization){
-            $result[] =$this->getLocalizationFromQueryResult($localization);
-        }
-        return $result;
     }
 
 
