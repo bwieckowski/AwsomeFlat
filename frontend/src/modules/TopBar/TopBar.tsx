@@ -2,6 +2,7 @@ import React from 'react';
 import * as P from './parts';
 import {ReactComponent as Logo }  from 'assets/Logo.svg';
 import {ReactComponent as Hamburger }  from 'assets/hamburger.svg';
+import {Link} from "react-router-dom";
 
 const TopBar = () =>{
 
@@ -12,18 +13,18 @@ const TopBar = () =>{
         },
         {
             title: 'Załóż konto',
-            href: '/'
+            href: '/register'
         },
         {
             title: 'Zaloguj',
-            href: '/'
+            href: '/login'
         }
     ];
 
     return (
         <P.Wrapper>
             <P.LogoWrapper>
-                <Logo/>
+                <Link to={'/'}><Logo/></Link>
             </P.LogoWrapper>
             <P.LinksWrapper>
                 {
@@ -38,7 +39,7 @@ const TopBar = () =>{
                 <Hamburger/>
             </P.HamburgerWrapper>
         </P.Wrapper>
-    )
+    );
 };
 
 export default TopBar;

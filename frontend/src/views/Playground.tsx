@@ -4,9 +4,12 @@ import Input from "design-system/components/Input/Input";
 import RangeInput from "design-system/components/RangeInput/RangeInput";
 import Dropdown from "design-system/components/Dropdown";
 import Toggle from "design-system/components/Toggle/Toggle";
-import Filter from "modules/Filter/Filter";
-import FlatItem from 'modules/FlatList/FlatItem/FlatItem';
+import Filter from "modules/MapPage/Filter/Filter";
+import FlatItem from 'modules/MapPage/FlatList/FlatItem/FlatItem';
 import {colors} from 'design-system'
+import img from 'assets/apartment-mini.png'
+import {ApartmentButton, FlatButton, GarageButton, RoomButton} from "../design-system/components/Buttons/Buttons";
+
 
 const Wrapper = styled.div`
    width: 400px;
@@ -37,15 +40,19 @@ const dropDownCallback = (item: React.MouseEvent<HTMLElement,MouseEvent>) => {
 const Playground = () =>{
     return (
             <Wrapper>
-                <FlatItem/>
-                 <StyledInput placeholder={"imie"} type={"text"} movingPlaceholder={false}/>
-                 <StyledInput placeholder={"imie"} type={"text"}/>
-                 <StyledInput placeholder={"imie"} type={"text"}  initValue={"testowe dane"}/>
-                 <StyledInput placeholder={"piniąszki"} type={"number"} unit={"zł"}/>
-                 <StyledRangeInput  type={"number"} unit={"zł"} />
-                 <StyledDropdown onChange={dropDownCallback} optionList={['item1', 'item2', 'item3']} />
-                 <StyledToggle onChange={(state) => { console.log(state)}}/>
-             <Filter/>
+                <ApartmentButton />
+                <RoomButton />
+                <GarageButton />
+                <FlatButton />
+                <StyledInput placeholder={"imie"} type={"text"} movingPlaceholder={false}/>
+                <StyledInput placeholder={"imie"} type={"text"}/>
+                <StyledInput placeholder={"imie"} type={"text"}  initValue={"testowe dane"}/>
+                <StyledInput placeholder={"piniąszki"} type={"number"} unit={"zł"}/>
+                <StyledRangeInput  type={"number"} unit={"zł"} />
+                <StyledDropdown onChange={dropDownCallback} optionList={['item1', 'item2', 'item3']} />
+                <StyledToggle onChange={(state) => { console.log(state)}}/>
+                <FlatItem miniPhoto={img}  type={"Apartament"} title={"Fajne mieszkanko"} price={30} area={12} />
+                <Filter/>
             </Wrapper>
     )
 };
