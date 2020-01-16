@@ -13,7 +13,7 @@ class PriceRepository extends Repository {
 
             $resultFromDb = $this->getExecutedStatement($query);
             return $this->getObjectFromDatabaseResult($resultFromDb, 'getLocalizationFromQueryResult');
-        } catch( ErrorResponse $error){
+        } catch( Response $error){
             die( $error->getMessage() );
         }
     }

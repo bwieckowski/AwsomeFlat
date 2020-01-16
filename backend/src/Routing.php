@@ -9,11 +9,19 @@ class Routing {
 
     public function __construct(){
         $this->routes = [
+            'users' => [
+                'controller' => 'UserController',
+                'POST' => 'getUser',
+            ],
             'user' =>[
                 'controller' => 'UserController',
                 'POST' => 'addNewUser',
                 'GET' => 'getUser',
                 'UPDATE' => 'updateUser',
+            ],
+            'register' =>[
+                'controller' => 'RegisterController',
+                'POST' => 'createUser',
             ],
             'authorize' =>[
                 'controller' => 'AuthorizationController',
@@ -39,7 +47,6 @@ class Routing {
         $method = $_SERVER['REQUEST_METHOD'];
         $explodedPath =  explode('?', $fullPath);
         $controllerName = explode('/',$explodedPath[0])[1];
-
 
         $controller = $this->routes[$controllerName]['controller'];
         $action = $this->routes[$controllerName][$method];

@@ -30,7 +30,7 @@ class LocalizationRepository extends Repository {
             $resultFromDb = $this->getExecutedStatement($query);
             return $this->getObjectFromDatabaseResult($resultFromDb, 'getLocalizationFromQueryResult');
 
-        } catch(ErrorResponse $exception) {
+        } catch(Response $exception) {
             return $exception;
         }
 

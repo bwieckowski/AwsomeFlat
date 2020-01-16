@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__.'/../config.php';
-require_once __DIR__.'/../Models/ErrorResponse.php';
+require_once __DIR__ . '/../Models/Response.php';
 
 class Database {
     private $username;
@@ -30,7 +30,7 @@ class Database {
             return $conn;
         }
         catch(PDOException $e) {
-            $error = new ErrorResponse($e->getMessage(),404);
+            $error = new Response($e->getMessage(),404);
             die( $error->toJSON() );
         }
     }

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../Models/ErrorResponse.php';
+require_once __DIR__ . '/../../Models/Response.php';
 require_once __DIR__.'/../../Utils/BindObject.php';
 require_once __DIR__.'/../../Models/Advertisement.php';
 require_once __DIR__.'/../../Models/Localization.php';
@@ -32,7 +32,7 @@ class AdvertisementRepository extends Repository {
                 ->end();
             $resultFromDb = $this->getExecutedStatement($query );
             return $this->getObjectFromDatabaseResult($resultFromDb, 'getBasicAdvertisementFromQueryResult');
-        } catch( ErrorResponse $exception){
+        } catch( Response $exception){
             return $exception;
         }
     }
@@ -63,7 +63,7 @@ class AdvertisementRepository extends Repository {
                 ->end();
             $resultFromDb = $this->getExecutedStatement($query );
             return $this->getObjectFromDatabaseResult($resultFromDb, 'getAdvertisementFromQueryResult');
-        } catch( ErrorResponse $exception){
+        } catch( Response $exception){
             return $exception;
         }
     }

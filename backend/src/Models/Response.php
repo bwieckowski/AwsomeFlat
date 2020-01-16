@@ -2,7 +2,7 @@
 
 require_once 'Model.php';
 
-class ErrorResponse extends Exception implements Model {
+class Response extends Exception implements Model {
 
     /**
      * Error constructor.
@@ -27,6 +27,8 @@ class ErrorResponse extends Exception implements Model {
     }
 
     public function toArray(): array{
+        unset($this -> file);
+        unset($this -> line);
         return get_object_vars($this);
     }
 }

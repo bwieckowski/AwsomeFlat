@@ -14,6 +14,15 @@ class Repository {
         $this->queryBuilder = new QueryBuilder();
     }
 
+    protected function executeStatment(string $query){
+        try {
+            $stmt = $this->database->connect()->prepare($query);
+            $stmt->execute();
+        } catch(PDOException $e){
+            throw new Response('Nie udało się dodać danych');
+        }
+    }
+
     protected function getExecutedStatement(string $query, array $bindObjects = null, int $data_type = PDO::FETCH_ASSOC ){
         $stmt = $this->database->connect()->prepare($query);
 
@@ -24,7 +33,7 @@ class Repository {
 
         $executeWasCorrect = $stmt->execute();
         if($executeWasCorrect === false) {
-            throw new ErrorResponse('Brak danych w bazie');
+            throw new Response('Brak danych w bazie');
         }
 
         return $stmt->fetchAll($data_type);

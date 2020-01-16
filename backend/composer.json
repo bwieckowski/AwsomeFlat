@@ -12,6 +12,7 @@
   "require": {
     "phpunit/phpunit": "8.4.3",
     "ext-json": "*",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "firebase/php-jwt": "^5.0"
   }
 }

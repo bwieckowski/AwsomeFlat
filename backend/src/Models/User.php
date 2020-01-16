@@ -2,35 +2,133 @@
 
 require_once 'Model.php';
 
-class User implements Model {
+class BasicUser implements Model{
+    protected $id;
 
-    private $id;
-    private $firstName;
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param mixed $firstName
+     */
+    public function setFirstName($firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password): void
+    {
+        $this->password = $password;
+    }
+    protected $firstName;
+    protected $email;
+    protected $password;
+
+
+    function __construct(
+                $id,
+                $firstName,
+                $email,
+                $password)
+    {
+        $this->id = $id;
+        $this->firstName = $firstName;
+        $this->email = $email;
+        $this->password = $password;
+    }
+
+
+    public function toJSON(): string{
+        return json_encode(get_object_vars($this), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function toArray(): array{
+        return get_object_vars($this);
+    }
+}
+
+class User extends BasicUser {
+
     private $lastName;
-    private $email;
     private $phone;
 
     /**
      * User constructor.
-     * @param $id
-     * @param $firstName
-     * @param $lastName
-     * @param $email
-     * @param $phone
+     * @param string $id
+     * @param string $firstName
+     * @param string $lastName
+     * @param string $email
+     * @param string $password
+     * @param string $phone
      */
 
     public function __construct(string $id,
                                 string $firstName,
-                                string $lastName,
+                                $lastName,
                                 string $email,
-                                string $phone)
+                                string $password,
+                                $phone)
     {
-        $this->id = $id;
-        $this->firstName = $firstName;
+
+        parent::__construct(
+            $id,
+            $firstName,
+            $email,
+            $password,
+        );
+
         $this->lastName = $lastName;
-        $this->email = $email;
         $this->phone = $phone;
     }
+
 
     public function toJSON(): string{
         return json_encode(get_object_vars($this), JSON_UNESCAPED_UNICODE);

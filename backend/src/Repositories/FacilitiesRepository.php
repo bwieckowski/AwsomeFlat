@@ -16,7 +16,7 @@ class FacilitiesRepository extends Repository {
                 ->end();
             $resultFromDb = $this->getExecutedStatement($query);
             return $this->getFacilityFromQueryResult($resultFromDb);
-        } catch ( ErrorResponse $exception){
+        } catch ( Response $exception){
             return $exception;
         }
     }
@@ -33,7 +33,7 @@ class FacilitiesRepository extends Repository {
 
             $resultFromDb = $this->getExecutedStatement($query);
             return $this->getObjectFromDatabaseResult($resultFromDb, 'getFacilityFromQueryResult');
-        } catch ( ErrorResponse $exception){
+        } catch ( Response $exception){
             return $exception;
         }
     }

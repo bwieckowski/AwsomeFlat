@@ -64,4 +64,41 @@ class QueryBuilderTest extends TestCase{
         $this->assertEquals($expected,$actual);
     }
 
+
+    public function testShouldReturnInsertInto():void {
+        $queryBuilder = new QueryBuilder();
+        $actual = $queryBuilder
+            ->insert()
+            ->addTable('User')
+            ->addColumn('first_name')
+            ->addColumn('last_name')
+            ->addValue('Bartek')
+            ->addValue('Kowalski123')
+            ->end();
+        $expected = "INSERT INTO `User`(first_name, last_name) VALUES('Bartek', 'Kowalski123');";
+        $this->assertEquals($expected,$actual);
+    }
+
+    public function testShouldReturnInsertIntoWithSelect():void {
+        $selectQueryBuilder = new QueryBuilder();
+        $subquery = $selectQueryBuilder->select()
+            ->addColumns(["id"])
+            ->addTable("User")
+            ->equals("id", 2)
+            ->endSubQuery();
+
+        $InsertQueryBuilder = new QueryBuilder();
+        $actual = $InsertQueryBuilder
+            ->insert()
+            ->addTable('User')
+            ->addColumn('first_name')
+            ->addColumn('last_name')
+            ->addValue('Bartek')
+            ->addValue('Kowalski123')
+            ->addSubQuery($subquery)
+            ->end();
+        $expected = "INSERT INTO `User`(first_name, last_name) VALUES('Bartek', 'Kowalski123', (SELECT id FROM 'User' WHERE id like '2'));";
+        $this->assertEquals($expected,$actual);
+    }
+
 }
