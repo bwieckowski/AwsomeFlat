@@ -1,16 +1,20 @@
 import React from 'react';
 import * as P from 'modules/MapPage/FlatList/FlatItem/parts';
-import {FlatBasic} from "api/apiModels";
+import { TransformedFlatBasic } from "api/apiModels";
 
+interface FlatItemProps extends TransformedFlatBasic{
+    className?: string;
+}
 
-const FlatItem: React.FC<FlatBasic> = ({
+const FlatItem: React.FC<FlatItemProps> = ({
     title,
     price,
     area,
     type,
-    miniPhoto
+    miniPhoto,
+    className,
 }) =>(
-    <P.Wrapper>
+    <P.Wrapper className={className}>
         <P.ImageWrapper>
             <P.Image src={miniPhoto} alt={"pokoj"} />
         </P.ImageWrapper>

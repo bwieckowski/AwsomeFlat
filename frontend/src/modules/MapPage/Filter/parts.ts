@@ -65,3 +65,8 @@ export const StyledDropdown = styled(Dropdown)`
 export const StyledCheckbox = styled(Checkbox)`
   margin-bottom: 10px;
 `;
+
+export const Button = styled.button`
+width: 200px;
+height: 20px;
+`;

@@ -40,6 +40,7 @@ export const SubTitle = styled.div`
 `;
 export const Type = styled.div`
   font-size: 10px;
+  margin-right: 10px;
 `;
 
 export const P = styled.p`

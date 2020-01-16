@@ -52,6 +52,7 @@ const Filter: React.FC<FilterProps> = ({
                         console.log(prop);
                     }} />
                 </P.AreaSection>
+                <P.Button> Filtruj </P.Button>
         </P.Wrapper>
     );
 };
