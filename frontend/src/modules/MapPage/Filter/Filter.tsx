@@ -1,8 +1,7 @@
-import React, {useEffect} from 'react';
-import axios from 'axios';
+import React from 'react';
 import * as P from 'modules/MapPage/Filter/parts'
 import RangeInput from "design-system/components/RangeInput/RangeInput";
-import {ApartmentButton, FlatButton, GarageButton, RoomButton} from "../../../design-system/components/Buttons/Buttons";
+import {ApartmentButton, FlatButton, GarageButton, RoomButton} from "design-system/components/Buttons/Buttons";
 
 interface FilterProps {
     districts?: Array<string>;
@@ -13,9 +12,6 @@ const Filter: React.FC<FilterProps> = ({
     districts,
     className,
 }) => {
-    useEffect(()=>{
-        axios.get('http://localhost:8080/user').then((resp) => {console.log(resp)})
-    },[]);
     return(
         <P.Wrapper className={className} >
             <P.H1>Filtry</P.H1>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import {Provider} from "react-redux";
 import * as P from './parts'
 import {
     BrowserRouter as Router,
@@ -8,6 +9,10 @@ import {
 import * as V from 'views';
 import './App.css';
 import TopBar from "modules/TopBar/TopBar";
+import {createStore} from "redux";
+import rootReducer from "./store/rootReducer";
+import {composeWithDevTools} from "redux-devtools-extension";
+
 
 const routes = [
     {
@@ -28,6 +33,8 @@ const routes = [
     }
 ];
 
+const store = createStore(rootReducer, composeWithDevTools());
+
 function App() {
   return (
     <div className="App">
@@ -35,17 +42,19 @@ function App() {
             { rel: 'stylesheet', href: 'http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css' }
         ]}/>
         <P.Wrapper>
-            <Router>
-                <TopBar />
-                {routes.map((route) => (
-                    <Route
-                        key={route.path}
-                        path={route.path}
-                        component={route.component}
-                        exact={true}
-                    />
-                ))}
-            </Router>
+            <Provider store={store}>
+                <Router>
+                    <TopBar />
+                    {routes.map((route) => (
+                        <Route
+                            key={route.path}
+                            path={route.path}
+                            component={route.component}
+                            exact={true}
+                        />
+                    ))}
+                </Router>
+            </Provider>
         </P.Wrapper>
     </div>
   );

@@ -3,14 +3,14 @@ import { TransformedFlatBasic } from "api/apiModels";
 import * as P from './parts';
 
 interface FlatListProps {
-    flats: Array<TransformedFlatBasic>;
+    flats?: Array<TransformedFlatBasic>;
     className?: string;
 }
 
 const FlatList: React.FC<FlatListProps> = ({flats, className}) => (
     <P.Wrapper className={className}>
         {
-            flats.map((flat, id) => (
+            flats && flats.map((flat, id) => (
                 <P.StyledItemList key={id} {...flat} />
             ))
         }

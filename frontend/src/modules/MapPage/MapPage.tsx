@@ -1,26 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect } from 'react';
 import * as P from 'modules/MapPage/parts';
-import {FlatBasic, TransformedFlatBasic} from "../../api/apiModels";
-import img from 'assets/apartment-mini.png';
+import {Flat, FlatBasic } from "../../api/apiModels";
 import axios from "axios";
+import {connect, useDispatch} from "react-redux";
+import {StoreState} from "../../store/constants";
+import {createGetFlatsSuccesstAction} from "../../store/MapPage/actions";
+import {getMapPlaces, transformArrayFlats} from "./helpers";
 
-const MapPage = () =>{
+interface MapPageProps {
+    flats?: Array<Flat>;
+}
 
-    const[basicFlats, setBasicFlats] = useState<Array<TransformedFlatBasic>>([]);
-
+const MapPage: React.FC<MapPageProps> = ({ flats }) =>{
+    const dispatch = useDispatch();
     useEffect(() =>{
         axios.get<Array<FlatBasic>>('http://localhost:8080/basicAdvertisements').then((resp) => {
-            const result: Array<TransformedFlatBasic> = resp.data.map( ({ id, price, title, type, area}) => {
-                return {
-                    id: id,
-                    title: title,
-                    miniPhoto: img,
-                    type: type,
-                    price: price.price,
-                    area: area,
-                }
-            });
-            setBasicFlats(result);
+            dispatch(createGetFlatsSuccesstAction(resp.data));
         })
     }, []);
 
@@ -28,11 +23,15 @@ const MapPage = () =>{
         <P.Wrapper>
             <P.StyledFilter />
             {
-                basicFlats && <P.StyledFlatList flats={basicFlats}/>
+                <P.StyledFlatList flats={transformArrayFlats(flats)}/>
             }
-            <P.StyledMap/>
+            <P.StyledMap mapPlaces={getMapPlaces(flats)}/>
         </P.Wrapper>
     );
 };
 
-export default MapPage;
+const mapStateToProps = ( state: StoreState ) => ({
+    flats: state.mapPage && state.mapPage.flats,
+});
+
+export default connect(mapStateToProps,{})(MapPage);
