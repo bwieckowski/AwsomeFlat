@@ -1,11 +1,11 @@
 import React, {useEffect } from 'react';
 import * as P from 'modules/MapPage/parts';
-import {Flat, FlatBasic } from "../../api/apiModels";
+import {Flat, FlatBasic } from "api/apiModels";
 import axios from "axios";
 import {connect, useDispatch} from "react-redux";
-import {StoreState} from "../../store/constants";
-import {createGetFlatsSuccesstAction} from "../../store/MapPage/actions";
+import {StoreState} from "store/constants";
 import {getMapPlaces, transformArrayFlats} from "./helpers";
+import {createGetFlatsSuccessAction} from "store/MapPage/actions";
 
 interface MapPageProps {
     flats?: Array<Flat>;
@@ -15,7 +15,7 @@ const MapPage: React.FC<MapPageProps> = ({ flats }) =>{
     const dispatch = useDispatch();
     useEffect(() =>{
         axios.get<Array<FlatBasic>>('http://localhost:8080/basicAdvertisements').then((resp) => {
-            dispatch(createGetFlatsSuccesstAction(resp.data));
+            dispatch(createGetFlatsSuccessAction(resp.data));
         })
     }, []);
 
@@ -34,4 +34,4 @@ const mapStateToProps = ( state: StoreState ) => ({
     flats: state.mapPage && state.mapPage.flats,
 });
 
-export default connect(mapStateToProps,{})(MapPage);
+export default connect(mapStateToProps)(MapPage);

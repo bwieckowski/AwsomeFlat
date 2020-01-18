@@ -30,7 +30,7 @@ class Advertisement extends BasicAdvertisement
                                 Price $price,
                                 float $area,
                                 string $type,
-                                User $user,
+                                BasicUser $user,
                                 array $facilities,
                                 array $images,
                                 string $addedTime)

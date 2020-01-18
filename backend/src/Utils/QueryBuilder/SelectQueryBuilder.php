@@ -58,10 +58,20 @@ class SelectQueryBuilder implements IQueryBuilder
 
         $this->whereOrAnd();
 
-        $this->query = $this->query.$columnName.' like "'.$mappedValue.'"';
+        $this->query = $this->query.$columnName." like '".$mappedValue."'";
         $this->whereCounter++;
         return $this;
     }
+
+
+    public function groupBy($field){
+        if($field === null )
+            return $this;
+
+        $this->query = $this->query." group by $field ";
+        return $this;
+    }
+
 
     public function moreThan($columnName, $mappedValue){
         if($columnName === null or $mappedValue === null)

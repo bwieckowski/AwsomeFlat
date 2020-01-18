@@ -1,11 +1,5 @@
-import {Flat } from "../api/apiModels";
-import {AxiosError} from "axios";
-
-export interface MapPage {
-    flats?: Array<Flat>;
-    error?: AxiosError,
-}
+import {MapPageState} from "./MapPage/constants";
 
 export interface StoreState {
-    mapPage?: MapPage
+    mapPage?: MapPageState;
 }

@@ -2,82 +2,19 @@
 
 require_once 'Model.php';
 
-class BasicUser implements Model{
-    protected $id;
 
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+class BasicUser implements Model {
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * @param mixed $firstName
-     */
-    public function setFirstName($firstName): void
-    {
-        $this->firstName = $firstName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email): void
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param mixed $password
-     */
-    public function setPassword($password): void
-    {
-        $this->password = $password;
-    }
     protected $firstName;
     protected $email;
     protected $password;
 
 
     function __construct(
-                $id,
-                $firstName,
-                $email,
-                $password)
+        $id,
+        $firstName,
+        $email,
+        $password = '')
     {
         $this->id = $id;
         $this->firstName = $firstName;
@@ -85,6 +22,47 @@ class BasicUser implements Model{
         $this->password = $password;
     }
 
+    protected $id;
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName($firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($email): void
+    {
+        $this->email = $email;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function setPassword($password): void
+    {
+        $this->password = $password;
+    }
 
     public function toJSON(): string{
         return json_encode(get_object_vars($this), JSON_UNESCAPED_UNICODE);
@@ -114,8 +92,9 @@ class User extends BasicUser {
                                 string $firstName,
                                 $lastName,
                                 string $email,
-                                string $password,
-                                $phone)
+                                $phone,
+                                string $password = ''
+                            )
     {
 
         parent::__construct(
@@ -131,10 +110,12 @@ class User extends BasicUser {
 
 
     public function toJSON(): string{
-        return json_encode(get_object_vars($this), JSON_UNESCAPED_UNICODE);
+        return json_encode($this->toArray(), JSON_UNESCAPED_UNICODE);
     }
 
     public function toArray(): array{
+        if($this->password == '')
+            unset($this->password);
         return get_object_vars($this);
     }
 }

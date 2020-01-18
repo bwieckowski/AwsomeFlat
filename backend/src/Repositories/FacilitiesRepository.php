@@ -2,7 +2,6 @@
 
 require_once "Repository.php";
 require_once __DIR__ . "/../Models/Facility.php";
-require_once __DIR__.'/../Utils/QueryBuilder/QueryBuilder.php';
 
 class FacilitiesRepository extends Repository {
 
@@ -21,16 +20,34 @@ class FacilitiesRepository extends Repository {
         }
     }
 
-    public function getFacilitiesByAdvertisementId( $facilitiesId ){
+    public function getFacilitiesByCity($city){
+        $query = "Select F.name, F.id From Advertisement_Facilities
+            inner JOIN Facilities F on Advertisement_Facilities.id_facilities = F.id
+            where id_advertisement IN  (
+                Select Advertisement.id from Advertisement
+            inner JOIN  Localization L on Advertisement.id_localization = L.id
+            inner Join District D on L.id_district = D.id
+            inner JOIN City C on D.id_city = C.id
+            where C.name = '$city')
+            group by F.name;";
         try{
-            $query = $this->queryBuilder
-                ->select()
-                ->addColumns(['id'=>'Facilities.id','name'])
-                ->addTable("Advertisement_Facilities")
-                ->innerJoin("Facilities","id","id_facilities")
-                ->equals("id_advertisement", $facilitiesId)
-                ->end();
+            $resultFromDb = $this->getExecutedStatement($query);
+            return $this->getObjectFromDatabaseResult($resultFromDb, 'getFacilityFromQueryResult');
+        } catch ( Response $exception){
+            return $exception;
+        }
+    }
 
+    public function getFacilitiesByAdvertisementId( $facilitiesId ){
+        $query = $this->queryBuilder
+            ->select()
+            ->addColumns(['id'=>'Facilities.id','name'])
+            ->addTable("Advertisement_Facilities")
+            ->innerJoin("Facilities","id","id_facilities")
+            ->equals("id_advertisement", $facilitiesId)
+            ->end();
+
+        try{
             $resultFromDb = $this->getExecutedStatement($query);
             return $this->getObjectFromDatabaseResult($resultFromDb, 'getFacilityFromQueryResult');
         } catch ( Response $exception){

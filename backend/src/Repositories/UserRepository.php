@@ -2,7 +2,6 @@
 
 require_once __DIR__.'/../Models/User.php';
 require_once  __DIR__.'/../Utils/BindObject.php';
-require_once  __DIR__.'/../Utils/QueryBuilder/QueryBuilder.php';
 require_once 'Repository.php';
 
 class UserRepository extends Repository {

@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__.'/../Models/Localization.php';
-require_once __DIR__.'/../Utils/QueryBuilder/QueryBuilder.php';
 
 class LocalizationRepository extends Repository {
 

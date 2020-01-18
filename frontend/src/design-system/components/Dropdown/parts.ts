@@ -48,6 +48,7 @@ export const List = styled.ul<{isOpen: boolean}>`
 
 export const ListItem = styled.li`
   padding: 5px 0;
+  cursor: pointer;
   &:hover{
     background-color: ${colors.lightestGray};
   }

@@ -31,8 +31,8 @@ const StyledToggle = styled(Toggle)`
   margin: 10px 0;
 `;
 
-const dropDownCallback = (item: React.MouseEvent<HTMLElement,MouseEvent>) => {
-    console.log(item.target);
+const dropDownCallback = (item: string) => {
+    console.log(item);
 };
 
 const Playground = () =>{

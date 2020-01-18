@@ -1,7 +1,6 @@
 import React from 'react'
 import {Map as LeafletMap, Marker, TileLayer} from 'react-leaflet';
-import { icons } from './constants';
-import {MapPlace} from "api/apiModels";
+import {icons, MapPlace} from './constants';
 
 interface MapProps {
     className?: string;

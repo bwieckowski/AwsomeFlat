@@ -1,8 +1,8 @@
 import React from 'react';
 import * as P from 'modules/MapPage/FlatList/FlatItem/parts';
-import { TransformedFlatBasic } from "api/apiModels";
+import {TransformedFlatBasic} from "../constants";
 
-interface FlatItemProps extends TransformedFlatBasic{
+interface FlatItemProps extends TransformedFlatBasic {
     className?: string;
 }
 

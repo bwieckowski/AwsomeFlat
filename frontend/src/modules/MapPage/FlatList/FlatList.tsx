@@ -1,6 +1,6 @@
 import React from 'react';
-import { TransformedFlatBasic } from "api/apiModels";
 import * as P from './parts';
+import {TransformedFlatBasic} from "./constants";
 
 interface FlatListProps {
     flats?: Array<TransformedFlatBasic>;

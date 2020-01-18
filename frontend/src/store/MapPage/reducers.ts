@@ -1,19 +1,22 @@
-import {MapPage } from "../constants";
-import {MapPageActions, MapPageActionTypes} from "./constants";
+import { MapPageActions, MapPageActionTypes } from "./constants";
+import {Flat} from "api/apiModels";
+import {combineReducers} from "redux";
+import filterReducer from "./Filter/reducers";
 
-export const mapPageReducer = ( state: MapPage = {}, action: MapPageActions ): MapPage => {
+const flatsReducer = (state: Array<Flat> = [], action: MapPageActions ): Array<Flat> => {
         switch (action.type) {
+            case MapPageActionTypes.GetFlatsRequest:
+                return [];
             case MapPageActionTypes.GetFlatsSuccess:
-                return {
-                    ...state,
-                    flats: action.flats,
-                };
-            case MapPageActionTypes.GetFlatsFailed:
-                return {
-                    ...state,
-                    error: action.error,
-                };
+                return [
+                    ...action.flats
+                ];
             default:
                return state
         }
 };
+
+export default combineReducers({
+    flats: flatsReducer,
+    filter: filterReducer,
+});

@@ -9,6 +9,10 @@ class Routing {
 
     public function __construct(){
         $this->routes = [
+            'filter' => [
+                'controller' => 'FilterController',
+                'GET' => 'getFilterProperties',
+            ],
             'users' => [
                 'controller' => 'UserController',
                 'POST' => 'getUser',

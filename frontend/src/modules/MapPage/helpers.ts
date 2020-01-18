@@ -1,4 +1,6 @@
-import {Flat, MapPlace, TransformedFlatBasic} from "api/apiModels";
+import {Flat } from "api/apiModels";
+import {TransformedFlatBasic} from "./FlatList/constants";
+import {MapPlace} from "./Map/constants";
 
 export const transformArrayFlats = ( flats?: Array<Flat> ): Array<TransformedFlatBasic> | undefined => {
     if(!flats)

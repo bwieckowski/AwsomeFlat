@@ -5,7 +5,7 @@ import { ReactComponent as Arrow} from 'assets/arrow.svg';
 
 interface DropdownProps {
     optionList: Array<string>;
-    onChange?: (event: React.MouseEvent<HTMLElement,MouseEvent>) => void;
+    onChange?: (value: string) => void;
     className?: string;
 }
 
@@ -19,9 +19,9 @@ const Dropdown: React.FC<DropdownProps> = ({optionList, onChange, className}) =>
 
     const onChangeItem = ( event: React.MouseEvent<HTMLElement,MouseEvent>  ) => {
         const target = event.target;
-        if (target instanceof HTMLInputElement) {
-            setCurrent( target.value );
-            onChange && onChange(event);
+        if (target instanceof HTMLLIElement) {
+            setCurrent( target.innerHTML );
+            onChange && onChange(target.innerHTML);
             setOpen(false);
         }
 

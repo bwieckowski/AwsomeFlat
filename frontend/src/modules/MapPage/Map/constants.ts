@@ -1,5 +1,11 @@
 import {BaseIconOptions, icon, Icon, Point} from "leaflet";
 
+export interface MapPlace {
+    type: string;
+    latitude: string;
+    longitude: string;
+}
+
 const commonOptions: BaseIconOptions = {
     iconSize: new Point(40, 50),
     className: 'leaflet-div-icon'

@@ -6,22 +6,33 @@ interface InputProps {
     type?: string;
     initValue?: string | number;
     unit?: string;
+    min?: number;
+    value?: any;
     movingPlaceholder?: boolean;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (value: any) => void;
+    onBlur?: ()=>void;
     className?: string;
 }
 
-const Input: React.FC<InputProps> = ({ placeholder, type, initValue, unit, movingPlaceholder, className, onChange }) => {
+const Input: React.FC<InputProps> = ({
+ placeholder,
+ type,
+ initValue,
+ min,
+ unit,
+ value,
+ movingPlaceholder,
+ className,
+ onBlur,
+ onChange }) => {
 
     const itHasNoEmptyValue = ( value: string | number | undefined ) => !!value;
     const [ clicked, setClicked ] = useState(itHasNoEmptyValue(initValue));
 
-    const [value, setValue] = useState(initValue);
     const inputRef = useRef(null);
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        onChange && onChange(event);
-        setValue(event.target.value);
+        onChange && onChange(event.target.value);
     };
 
     const labelClick = () =>{
@@ -39,11 +50,12 @@ const Input: React.FC<InputProps> = ({ placeholder, type, initValue, unit, movin
                     <P.StyledInput
                         value={value}
                         type={type}
+                        min={min&&min}
                         onChange={changeHandler}
                         ref={inputRef}
                         placeholder={ movingPlaceholder ? undefined : placeholder}
                         onFocus={()=>{setClicked(true)} }
-                        onBlur={()=>{setClicked(itHasNoEmptyValue(value))}}
+                        onBlur={()=>{setClicked(itHasNoEmptyValue(value)); onBlur&&onBlur();}}
                     />
                     {movingPlaceholder && (<P.StyledLabel onClick={ labelClick } isClicked={clicked}>{placeholder}</P.StyledLabel>)}
                 </P.StyledContainer>
@@ -52,11 +64,5 @@ const Input: React.FC<InputProps> = ({ placeholder, type, initValue, unit, movin
         </>
     )
 };
-Input.defaultProps = {
-    initValue: '',
-    movingPlaceholder: true,
-    onChange: ()=>{},
-};
-
 
 export default Input;
