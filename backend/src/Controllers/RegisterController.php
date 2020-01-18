@@ -6,7 +6,7 @@ class RegisterController {
 
     public function createUser(){
         $userRepository = new UserRepository();
-        $parameters = $_POST;
+        $parameters = json_decode(file_get_contents('php://input'),true);
         $users = $userRepository->getBasicUserByEmail($parameters['email']);
         if( sizeof($users) ){
             $error = new Response('Podany użytkownik już istnieje', 404);

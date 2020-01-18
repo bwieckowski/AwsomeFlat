@@ -29,6 +29,8 @@ class Response extends Exception implements Model {
     public function toArray(): array{
         unset($this -> file);
         unset($this -> line);
+        if( $this->code == '404')
+            http_response_code('404');
         return get_object_vars($this);
     }
 }
