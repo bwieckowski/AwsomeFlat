@@ -9,6 +9,10 @@ class Routing {
 
     public function __construct(){
         $this->routes = [
+            'userPanel' => [
+                'controller' => 'UserPanelController',
+                'POST' => 'getInitialData',
+            ],
             'filter' => [
                 'controller' => 'FilterController',
                 'GET' => 'getFilterProperties',

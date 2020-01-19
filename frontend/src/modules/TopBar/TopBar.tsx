@@ -1,16 +1,35 @@
-import React from 'react';
+import React,  from 'react';
 import * as P from './parts';
 import {ReactComponent as Logo }  from 'assets/Logo.svg';
 import {ReactComponent as Hamburger }  from 'assets/hamburger.svg';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 const TopBar = () =>{
+    const history = useHistory();
 
-    const links = [
+    let jwt = localStorage.getItem("token");
+    const links = jwt ?
+    [
+        {
+            title: 'Panel Użytkownika',
+            href: '/userPanel'
+        },
         {
             title: 'Wystaw Ofertę',
-            href: '/'
+            href: '/userPanel/newOffer'
         },
+        {
+            title: 'Wyloguj',
+            href: '/logout'
+        }
+    ] :
+
+    [
+        {
+            title: 'Wystaw Ofertę',
+            href: '/login'
+        },
+
         {
             title: 'Załóż konto',
             href: '/register'

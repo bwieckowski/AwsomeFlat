@@ -13,7 +13,6 @@ import {createStore} from "redux";
 import rootReducer from "./store/rootReducer";
 import {composeWithDevTools} from "redux-devtools-extension";
 
-
 const routes = [
     {
        path: '/',
@@ -30,6 +29,14 @@ const routes = [
     {
         path: '/login',
         component: V.LoginView,
+    },
+    {
+        path: '/userPanel',
+        component: V.UserPanel,
+    },
+    {
+        path: '/logout',
+        component: V.Logout,
     }
 ];
 

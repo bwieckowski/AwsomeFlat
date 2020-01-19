@@ -43,7 +43,7 @@ export const TypeSection = styled(Section)`
 `;
 
 export const LocalizationSection = styled(Section)`
-padding-right: 150px;
+padding-right: 120px;
 `;
 
 export const PriceSection = styled(Section)`

@@ -2,17 +2,16 @@ import React, { useState} from "react";
 import * as P from './parts';
 import axios, {AxiosError} from "axios";
 import {sha256} from "js-sha256";
+import {useHistory} from "react-router";
 
 export interface LoginSuccess{
     jwt: string;
 }
 
 export const Login = () => {
-
+    const history = useHistory();
     const [email, setEmail ] = useState('');
     const [password, setPassword ] = useState('');
-
-
 
     const tryLogin = () =>{
         const params = new URLSearchParams();
@@ -22,7 +21,8 @@ export const Login = () => {
         axios.post<LoginSuccess>('http://localhost:8080/authorize' , params)
             .then((response) => {
             console.log(response);
-            localStorage.setItem("token", response.data.jwt)
+            localStorage.setItem("token", response.data.jwt);
+            history.push('/userPanel');
         }).catch((e: AxiosError) => {
             e.response && console.log(e.response.data);
         });
