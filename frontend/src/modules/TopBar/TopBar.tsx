@@ -1,4 +1,4 @@
-import React,  from 'react';
+import React from 'react';
 import * as P from './parts';
 import {ReactComponent as Logo }  from 'assets/Logo.svg';
 import {ReactComponent as Hamburger }  from 'assets/hamburger.svg';
