@@ -6,3 +6,4 @@ require_once 'RegisterController.php';
 require_once 'AuthorizationController.php';
 require_once 'FilterController.php';
 require_once  'UserPanelController.php';
+require_once 'FacilitiesController.php';

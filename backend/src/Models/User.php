@@ -24,6 +24,10 @@ class BasicUser implements Model {
 
     protected $id;
 
+    public function unsetPassword(){
+        unset($this->password);
+    }
+
     public function getId()
     {
         return $this->id;

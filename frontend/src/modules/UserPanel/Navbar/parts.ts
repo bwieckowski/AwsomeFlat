@@ -4,13 +4,13 @@ import {Link} from "react-router-dom";
 
 export const Wrapper = styled.div`
   width: 250px;
-  margin: 26px 45px;
+  height: fit-content;
   padding: 33px;
   background-color: ${colors.white};
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   border-radius: 33px;
 `;
 
@@ -23,6 +23,7 @@ export const Header = styled.div`
 `;
 
 export const Name = styled.div`
+  margin-top: 10px;
   font-weight: 600;
 `;
 export  const Menu = styled.ul``;

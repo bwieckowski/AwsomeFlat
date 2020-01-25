@@ -13,7 +13,7 @@ class RegisterController {
             die($error->toJSON());
         }
         else{
-            $response = new Response( $userRepository->createUser($parameters), 200);
+            $response = $userRepository->createUser($parameters);
             echo $response->toJSON();
         }
     }

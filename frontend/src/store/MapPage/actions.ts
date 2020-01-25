@@ -11,3 +11,9 @@ export const createGetFlatsSuccessAction = (flats: Array<FlatBasic>) => ({
     type:MapPageActionTypes.GetFlatsSuccess,
     flats
 });
+
+
+export const createCenterMapOnFlat= (coords: [number, number]) => ({
+    type:MapPageActionTypes.CenterMapOnCoords,
+    coords
+});

@@ -1,20 +1,23 @@
 import React from 'react'
 import {Map as LeafletMap, Marker, TileLayer} from 'react-leaflet';
 import {icons, MapPlace} from './constants';
+import {connect} from "react-redux";
+import {StoreState} from "../../../store/constants";
 
 interface MapProps {
     className?: string;
     mapPlaces?: Array<MapPlace>;
+    center?: [number, number];
     currentCityLocation?: Location;
 }
 
-const Map: React.FC<MapProps> = ({mapPlaces, className}) =>{
+export const Map: React.FC<MapProps> = ({mapPlaces, center, className}) =>{
 
         return (
             <LeafletMap
                 className={className}
-                center={[50.0646501, 19.944979]}
-                zoom={12}
+                center={ center ? center : [50.0646501, 19.944979]}
+                zoom={ center ? 16 : 12}
                 maxZoom={16}
                 minZoom={3}
                 attributionControl={true}
@@ -43,5 +46,8 @@ const Map: React.FC<MapProps> = ({mapPlaces, className}) =>{
         );
 };
 
+const mapStateToProps = ( state: StoreState) => ({
+    center: state.mapPage&&state.mapPage.centeredFlat,
+});
 
-export default Map
+export default connect(mapStateToProps, {})(Map)

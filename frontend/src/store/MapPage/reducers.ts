@@ -16,7 +16,21 @@ const flatsReducer = (state: Array<Flat> = [], action: MapPageActions ): Array<F
         }
 };
 
+
+const centerOnFlat = (state: [number, number] = [50, 19], action: MapPageActions ): [number, number] => {
+    switch (action.type) {
+        case MapPageActionTypes.CenterMapOnCoords:
+            return [
+                action.coords[0],
+                action.coords[1]
+            ];
+        default:
+            return state
+    }
+};
+
 export default combineReducers({
     flats: flatsReducer,
     filter: filterReducer,
+    centeredFlat: centerOnFlat
 });

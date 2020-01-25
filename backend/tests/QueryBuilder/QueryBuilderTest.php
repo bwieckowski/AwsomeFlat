@@ -101,4 +101,16 @@ class QueryBuilderTest extends TestCase{
         $this->assertEquals($expected,$actual);
     }
 
+
+    public function testDeleteQueryBuilder(){
+        $queryBuilder = new QueryBuilder();
+        $actual = $queryBuilder
+            ->delete()
+            ->addTable("Advertisement")
+            ->equals('id', 2)
+            ->end();
+
+        $expected = "Delete From `Advertisement` WHERE id like '2';";
+        $this->assertEquals($expected,$actual);
+    }
 }

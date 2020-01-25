@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import * as P from './parts';
 import { ReactComponent as Arrow} from 'assets/arrow.svg';
 
 interface DropdownProps {
     optionList: Array<string>;
-    onChange?: (value: string) => void;
+    onChange?: (value: string, index?: number) => void;
     className?: string;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({optionList, onChange, className}) => {
+
     const [ current, setCurrent ] = useState<string>( optionList[0] );
     const [ isOpen, setOpen ] = useState(false);
 
@@ -17,20 +17,16 @@ const Dropdown: React.FC<DropdownProps> = ({optionList, onChange, className}) =>
         setOpen( !isOpen );
     };
 
-    const onChangeItem = ( event: React.MouseEvent<HTMLElement,MouseEvent>  ) => {
-        const target = event.target;
-        if (target instanceof HTMLLIElement) {
-            setCurrent( target.innerHTML );
-            onChange && onChange(target.innerHTML);
-            setOpen(false);
-        }
-
+    const onChangeItem = ( name: string, index: number ) => {
+        setCurrent( name );
+        onChange && onChange(name, index );
+        setOpen(false);
     };
 
     return (
      <P.Wrapper className={className}>
          <P.Container  onClick={toggleList}>
-             <P.Selected>{current}</P.Selected>
+             <P.Selected>{current ? current : optionList[0]}</P.Selected>
              <P.Button>
                  <P.RotateContainer isOpen={isOpen} >
                      <Arrow />
@@ -39,23 +35,11 @@ const Dropdown: React.FC<DropdownProps> = ({optionList, onChange, className}) =>
          </P.Container>
          <P.List isOpen={isOpen}>
              { optionList && optionList.length && optionList.map((item, key)=>(
-                 <P.ListItem key={key} onClick={onChangeItem}>{item}</P.ListItem>
+                 <P.ListItem key={key} onClick={() => onChangeItem(item, key)}>{item}</P.ListItem>
              ))}
          </P.List>
      </P.Wrapper>
     )
-};
-
-Dropdown.defaultProps = {
-    optionList: [],
-    className: '',
-    onChange: () => {},
-};
-
-Dropdown.propTypes = {
-    className: PropTypes.string,
-    optionList: PropTypes.array.isRequired,
-    onChange: PropTypes.func,
 };
 
 export default Dropdown;

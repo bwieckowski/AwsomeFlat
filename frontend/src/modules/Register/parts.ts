@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import {colors, Input, media} from "../../design-system";
 import {StyledInput, StyledLabel} from "../../design-system/components/Input/parts";
 import {BreakpointsName} from "../../design-system/grid/media";
+import Message from "modules/Messages/Messages";
 
 export const Wrapper = styled.div`
     padding: 20px 0 ;
@@ -28,6 +29,9 @@ export const InputsWrapper = styled.div`
   align-items: center;
 `;
 
+
+
+
 export const StyledButton = styled.button`
     background: ${colors.button};
     padding: 12px 20px;
@@ -39,6 +43,10 @@ export const StyledButton = styled.button`
     cursor: pointer;
     font-weight: 500;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    &:disabled{
+      background-color: ${colors.buttonDisabled};
+      cursor: not-allowed;
+    }
 `;
 
 export const RegisterInput = styled(Input)`

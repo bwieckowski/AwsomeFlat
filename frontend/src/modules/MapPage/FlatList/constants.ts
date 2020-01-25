@@ -1,8 +1,11 @@
+import {PropertyType} from "api/apiModels";
+
 export interface TransformedFlatBasic {
     id: number;
     title: string;
     miniPhoto: string;
-    type: string;
+    localization: [number, number];
+    type: PropertyType;
     price: number;
     area: number;
 }

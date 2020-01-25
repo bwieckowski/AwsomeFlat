@@ -14,7 +14,7 @@ class FacilitiesRepository extends Repository {
                 ->equals("id", $params['id'])
                 ->end();
             $resultFromDb = $this->getExecutedStatement($query);
-            return $this->getFacilityFromQueryResult($resultFromDb);
+            return $this->getObjectFromDatabaseResult($resultFromDb, 'getFacilityFromQueryResult');
         } catch ( Response $exception){
             return $exception;
         }

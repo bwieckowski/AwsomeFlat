@@ -28,6 +28,11 @@ export const InputsWrapper = styled.div`
   align-items: center;
 `;
 
+export const Message = styled.div`
+  color: red;
+  width: 100%;
+`;
+
 export const StyledButton = styled.button`
     background: ${colors.button};
     padding: 12px 20px;
@@ -39,6 +44,11 @@ export const StyledButton = styled.button`
     cursor: pointer;
     font-weight: 500;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    &:disabled{
+      background-color: ${colors.buttonDisabled};
+      cursor: not-allowed;
+    }
 `;
 
 export const LoginInput = styled(Input)`

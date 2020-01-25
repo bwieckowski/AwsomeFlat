@@ -8,8 +8,9 @@ import {media} from "../../design-system";
 export const Wrapper = styled.div`
   width: 100%;
   display: flex;
-  height: calc(100% - 60px);
+  height: calc(100vh - 60px);
   justify-content: space-between;
+  
 `;
 
 export const StyledFilter = styled(Filter)`
@@ -32,6 +33,9 @@ export const StyledFlatList = styled(FlatList)`
     width: 520px;
   }
   
+`;
+export const ModalWrapper = styled.div<{show: boolean}>`
+  display: ${({ show }) => show? 'block': 'none'};
 `;
 
 export const StyledMap = styled(Map)`

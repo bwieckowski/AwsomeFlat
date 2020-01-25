@@ -6,6 +6,7 @@ export enum MapPageActionTypes {
     GetFlatsRequest = 'MapPage/GetFlatsRequest',
     GetFlatsSuccess = 'MapPage/GetFlatsSuccess',
     GetFlatsFailed = 'MapPage/GetFlatsFailed',
+    CenterMapOnCoords = 'MapPage/CenterMapOnCoords'
 }
 
 export interface GetFlatsParameters {
@@ -16,6 +17,7 @@ export interface MapPageState {
     flats?: Array<Flat>;
     filter?: FilterState;
     error?: AxiosError;
+    centeredFlat?: [number, number];
 }
 
 export type  MapPageActions = {
@@ -25,6 +27,9 @@ export type  MapPageActions = {
     type: MapPageActionTypes.GetFlatsSuccess;
     flats: Array<Flat>;
 } | {
+    type: MapPageActionTypes.CenterMapOnCoords;
+    coords: [number, number];
+}| {
     type: MapPageActionTypes.GetFlatsFailed
     error: AxiosError
 };

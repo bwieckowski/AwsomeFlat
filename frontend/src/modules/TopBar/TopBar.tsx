@@ -3,16 +3,23 @@ import * as P from './parts';
 import {ReactComponent as Logo }  from 'assets/Logo.svg';
 import {ReactComponent as Hamburger }  from 'assets/hamburger.svg';
 import {Link, useHistory} from "react-router-dom";
+import {connect} from "react-redux";
+import {StoreState} from "../../store/constants";
 
-const TopBar = () =>{
-    const history = useHistory();
+interface TopBarProps {
+jwt?: string;
+}
 
-    let jwt = localStorage.getItem("token");
+const TopBar: React.FC<TopBarProps> = ({
+jwt,
+}) =>{
+
+
     const links = jwt ?
     [
         {
             title: 'Panel Użytkownika',
-            href: '/userPanel'
+            href: '/userPanel/newOffer'
         },
         {
             title: 'Wystaw Ofertę',
@@ -22,43 +29,47 @@ const TopBar = () =>{
             title: 'Wyloguj',
             href: '/logout'
         }
-    ] :
+    ] : [
+            {
+                title: 'Wystaw Ofertę',
+                href: '/login'
+            },
 
-    [
-        {
-            title: 'Wystaw Ofertę',
-            href: '/login'
-        },
-
-        {
-            title: 'Załóż konto',
-            href: '/register'
-        },
-        {
-            title: 'Zaloguj',
-            href: '/login'
-        }
-    ];
+            {
+                title: 'Załóż konto',
+                href: '/register'
+            },
+            {
+                title: 'Zaloguj',
+                href: '/login'
+            }
+        ];
 
     return (
         <P.Wrapper>
-            <P.LogoWrapper>
-                <Link to={'/'}><Logo/></Link>
-            </P.LogoWrapper>
-            <P.LinksWrapper>
-                {
-                    links.map((item, key) => (
-                        <P.LinkItem key={key}>
-                            <P.StyledLink to={item.href}>{item.title}</P.StyledLink>
-                        </P.LinkItem>
-                    ))
-                }
-            </P.LinksWrapper>
-            <P.HamburgerWrapper>
-                <Hamburger/>
-            </P.HamburgerWrapper>
+            <P.InnerWrapper>
+                <P.LogoWrapper>
+                    <Link to={'/'}><Logo/></Link>
+                </P.LogoWrapper>
+                <P.LinksWrapper>
+                    {
+                        links.map((item, key) => (
+                            <P.LinkItem key={key}>
+                                <P.StyledLink to={item.href}>{item.title}</P.StyledLink>
+                            </P.LinkItem>
+                        ))
+                    }
+                </P.LinksWrapper>
+                <P.HamburgerWrapper>
+                    <Hamburger/>
+                </P.HamburgerWrapper>
+            </P.InnerWrapper>
         </P.Wrapper>
     );
 };
 
-export default TopBar;
+const mapStateToProps = (state: StoreState) =>({
+    jwt: state.userInfo && state.userInfo.jwt,
+});
+
+export default connect(mapStateToProps)(TopBar);

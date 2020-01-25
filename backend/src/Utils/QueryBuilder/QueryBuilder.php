@@ -2,6 +2,7 @@
 
 require_once 'SelectQueryBuilder.php';
 require_once 'InsertQueryBuilder.php';
+require_once 'DeleteQueryBuilder.php';
 
 class QueryBuilder{
 
@@ -13,6 +14,12 @@ class QueryBuilder{
     public function insert(){
         $query = 'INSERT'.' '.'INTO ';
         return new InsertQueryBuilder($query);
+    }
+
+
+    public function delete() {
+        $query = 'Delete'.' '.'From ';
+        return new DeleteQueryBuilder($query);
     }
 
 }

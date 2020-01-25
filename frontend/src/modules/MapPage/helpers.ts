@@ -6,12 +6,13 @@ export const transformArrayFlats = ( flats?: Array<Flat> ): Array<TransformedFla
     if(!flats)
         return undefined;
 
-    return flats.map( ({ id, price, title, type, area, miniPhoto}) => {
+    return flats.map( ({ id, price, title, type, area, localization, miniPhoto}) => {
         return {
             id: id,
             title: title,
             miniPhoto: miniPhoto,
             type: type,
+            localization: [parseFloat(localization.latitude), parseFloat(localization.longitude)],
             price: price.price,
             area: area,
         }
@@ -26,7 +27,7 @@ export const getMapPlaces = ( flats?: Array<Flat> ): Array<MapPlace> | undefined
         return {
             latitude: localization.latitude,
             longitude: localization.longitude,
-            type: type,
+            type: type.enum,
         }
     });
 };

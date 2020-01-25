@@ -3,30 +3,25 @@ import * as P from 'design-system/components/Checkbox/parts';
 
 interface CheckboxProps {
     className?: string,
+    id?: string;
     label: string,
-    onChange: ( isChecked: boolean)=>void ,
+    onChange: ( isChecked: boolean, id?: string)=>void ,
 }
 
-const Checkbox: React.FC<CheckboxProps> = ( {className, label, onChange}) => {
+const Checkbox: React.FC<CheckboxProps> = ( {className, id, label, onChange}) => {
     const [isChecked, setChecked] = useState(false);
 
     const toggleChecked = () => {
         setChecked(!isChecked);
-        onChange(!isChecked);
+        onChange(!isChecked, id);
     };
 
     return (
         <P.Wrapper onClick = {toggleChecked} className={className}>
-            <P.Box><P.StyledChecked isChecked={isChecked}/></P.Box>
+            <P.Box><P.StyledChecked checked={isChecked}/></P.Box>
             <P.Label>{label}</P.Label>
         </P.Wrapper>
     );
 };
 
 export default Checkbox;
-
-Checkbox.defaultProps = {
-    label: '',
-    className: '',
-    onChange: () => {},
-};

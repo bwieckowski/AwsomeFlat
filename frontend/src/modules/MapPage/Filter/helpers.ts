@@ -12,13 +12,12 @@ export const rangeQuery = ( value: RangeInputOutput, name: string ) => {
         return  '';
 
     let { max, min } = value;
-
+    console.log(value);
     if(!min)
         min = 0;
-
     if(max > 0)
         return `&${name}_between1=${min}&${name}_between2=${max}`;
-    if(max == 0 && min > 0)
+    if(!max && min > 0)
         return `&${name}_mt=${min}`;
 
     return '';

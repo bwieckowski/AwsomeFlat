@@ -14,6 +14,10 @@ export const StyledWrapper = styled.div`
   width: 100%;
 `;
 
+export const ErrorMessage = styled.p`
+  color: ${colors.apartment};
+  font-size: 11px;
+`;
 
 export const StyledLabel = styled.label<{ isClicked: boolean; }>`
     color: ${colors.lightestGray};
@@ -41,4 +45,25 @@ export const UnitLabel = styled.div`
   align-items: center;
   margin-left: 13px;
   color: ${colors.gray}
+`;
+
+
+export const List = styled.ul<{show: boolean}>`
+  display: ${({show}) => show ? 'block' : 'none' };
+  max-height: 150px;
+  overflow: scroll;
+  background-color: ${colors.white};
+  border: 1px solid ${colors.lightestGray};
+  border-top: none; 
+  position: absolute;
+  top: 74px;
+  z-index: 9998;
+`;
+
+export const ListItem = styled.li`
+  padding: 5px 0;
+  cursor: pointer;
+  &:hover{
+    background-color: ${colors.lightestGray};
+  }
 `;

@@ -1,32 +1,40 @@
 import React from "react";
 import * as P from './parts';
 import userThumb from 'assets/user-circle.png';
+import {connect} from "react-redux";
+import {StoreState} from "store/constants";
+import {getFirstName} from "./helper";
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+    className?: string;
+    firstName?: string;
+}
+
+const Navbar: React.FC<NavbarProps> = ({className, firstName}) => {
 
     const links = [
+        {
+            name: 'Moje Oferty',
+            path: '/userPanel/myOffers',
+        },
         {
             name: 'Wystaw Ofertę',
             path: '/userPanel/newOffer',
         },
         {
-            name: 'Moje Oferty',
-            path: '/myOfferts',
-        },
-        {
             name: 'Ustawienia',
-            path: '/settings',
+            path: '/userPanel/settings',
         },
         {
             name: 'Wyloguj',
             path: '/logout',
         },
-    ]
+    ];
 
-    return<P.Wrapper>
+    return (<P.Wrapper className={className}>
         <P.Header>
             <P.Image src={userThumb} />
-            <P.Name>Jan Kowalski</P.Name>
+            <P.Name>{firstName}</P.Name>
         </P.Header>
         <P.Menu>
             {
@@ -37,7 +45,11 @@ const Navbar: React.FC = () => {
                 ))
             }
         </P.Menu>
-    </P.Wrapper>
+    </P.Wrapper>);
 };
 
-export default Navbar;
+const mapStateToProps = (state: StoreState): NavbarProps => ({
+    firstName: getFirstName(state),
+});
+
+export default connect(mapStateToProps)(Navbar);

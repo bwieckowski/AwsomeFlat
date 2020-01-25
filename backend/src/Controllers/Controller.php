@@ -2,6 +2,23 @@
 
 class Controller {
 
+    protected function parametersHasAllKeys($parameters, $keys){
+        foreach ($keys as $key){
+            if(!isset($parameters[$key])){
+                throw new Response("Niewłaściwe parametry", 401);
+            }
+        }
+    }
+
+    protected function parametersHasOneOrMoreKey($parameters, $keys){
+        foreach ($keys as $key){
+            if(isset($parameters[$key])){
+               return;
+            }
+        }
+        throw new Response("Niewłaściwe parametry", 401);
+    }
+
     protected function renderArray($array) {
         $result = [];
         if($array != null) {

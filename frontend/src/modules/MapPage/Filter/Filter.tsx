@@ -10,6 +10,7 @@ import {StoreState} from "store/constants";
 import {createGetFiltersSuccess} from "../../../store/MapPage/Filter/actions";
 import {districtsListToName, rangeQuery} from "./helpers";
 import {createGetFlatsSuccessAction} from "../../../store/MapPage/actions";
+import {url} from "../../../api/config";
 
 interface FilterOwnProps extends FilterState {
     className?: string;
@@ -27,12 +28,15 @@ const Filter: React.FC<FilterProps> = ({
     const [ selectedDistrict, selectDistrict ] = useState();
     const [ priceRange, setPriceRange ] = useState();
     const [ areaRange, setAreaRange ] = useState();
+    const [cityState, setCityState] = useState();
 
     const dispatch = useDispatch();
 
     const onTypeCity = (value: string) => {
         console.log(value);
-        axios.get<FilterState>(`http://localhost:8080/filter?city=${value}`).then((resp) => {
+        setCityState(value);
+        axios.get<FilterState>(`http://${url}/filter?city=${value}`).then((resp) => {
+            selectDistrict('');
             dispatch(createGetFiltersSuccess(resp.data));
         })
     };
@@ -54,7 +58,7 @@ const Filter: React.FC<FilterProps> = ({
         const priceQuery = rangeQuery(priceRange, 'price');
         const areaQuery = rangeQuery(areaRange, 'area');
         console.log(priceQuery);
-        const path = `http://localhost:8080/advertisements?${ cityName ? 'city='+cityName : '' }${ selectedDistrict ? selectedDistrict!='Wszystkie' && '&district='+selectedDistrict : ''}`+priceQuery+areaQuery;
+        const path = `http://${url}/advertisements?${ cityState ? 'city='+cityState : '' }${ selectedDistrict ? selectedDistrict!=='Wszystkie' ? '&district='+selectedDistrict : '' : ''  }`+priceQuery+areaQuery;
 
         console.log(encodeURI(path));
         axios.get<Array<FlatBasic>>(encodeURI(path).toString()).then((resp) => {
@@ -73,10 +77,11 @@ const Filter: React.FC<FilterProps> = ({
                         onChange = {debouncedOnTypeCity}
                         placeholder={"Miasto"}
                         type={"text"}/>
-                    { districts && districts.length &&
-                        <P.StyledDropdown
+                    { districts ? districts.length ?
+                        (<P.StyledDropdown
                             onChange={onDistrictSelect}
-                            optionList={districts ? districtsListToName(districts) : []} />
+                            optionList={districts ? districtsListToName(districts) : []}
+                        />) : (<></>) : (<></>)
                     }
                 </P.LocalizationSection>
                 <P.TypeSection>

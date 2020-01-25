@@ -3,7 +3,7 @@ import {colors} from 'design-system';
 
 export const Wrapper = styled.div`
   background-color: ${colors.background};
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
 
 `;

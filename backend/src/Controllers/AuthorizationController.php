@@ -48,10 +48,13 @@ class AuthorizationController {
         $user = $this->userCanLoggin( $userData, $userArray );
 
         $jwt = $this->generateJWT($user);
+        $user = $user->toArray();
+        unset($user['password']);
         echo json_encode(
             array(
                 "message" => "Successful login.",
-                "jwt" => $jwt
+                "jwt" => $jwt,
+                "user" => $user,
             )
         );
 

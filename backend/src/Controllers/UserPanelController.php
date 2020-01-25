@@ -1,14 +1,27 @@
 <?php
 
 require_once 'ProtectedController.php';
+require_once __DIR__.'/../Models/AddOfferInitial.php';
 
 class UserPanelController extends ProtectedController{
 
-    public function __construct(){
-        parent::__construct($_POST['jwt']);
-    }
-
     public function getInitialData(){
-        echo 'Działa '.$_POST['jwt'];
+        $this->authenticate($_POST['jwt']);
+
+        $propertyTypesRepository = new PropertyTypeRepository();
+        $propertyTypes = $propertyTypesRepository->getAllPropertyTypes();
+
+        $facilitiesRepository = new FacilitiesRepository();
+        $property = [];
+        $property['id'] = null;
+        $facilities = $facilitiesRepository->getFacilitiesByParams($property);
+
+        $addOfferInitial = new AddOfferInitial(
+            $propertyTypes,
+            $facilities,
+            $this->user
+        );
+
+        $this->renderObject($addOfferInitial->toJSON());
     }
 }

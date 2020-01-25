@@ -59,7 +59,7 @@ class UserRepository extends Repository {
 
         try {
             $this->executeStatment($transationQuery);
-            return 'Użytkownik zarejstrowany pomyślnie';
+            return new Response('Użytkownik zarejstrowany pomyślnie', 200);
         } catch( Response $exception ){
             return $exception;
         }
@@ -129,7 +129,7 @@ class UserRepository extends Repository {
 
     public function getBasicUserFromQueryResult( $basicUser ){
         return new BasicUser(
-            $basicUser['id'],
+            $basicUser['id_user'],
             $basicUser['first_name'],
             $basicUser['email'],
             $basicUser['password']
@@ -138,7 +138,7 @@ class UserRepository extends Repository {
 
     public function getUserFromQueryResult($user){
        return new User(
-            $user['id'],
+            $user['id_user'],
             $user['first_name'],
             $user['last_name'],
             $user['email'],

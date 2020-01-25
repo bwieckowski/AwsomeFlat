@@ -36,12 +36,22 @@ class Routing {
                 'POST' => 'authorizateUser',
             ],
             'facilities' =>[
-                'controller' => 'AdvertisementController',
+                'controller' => 'FacilitiesController',
                 'GET' => 'getFacilities',
+            ],
+            'facilitiesByAdvertisementId' =>[
+                'controller' => 'FacilitiesController',
+                'GET' => 'getFacilitiesByAdvertisementId',
             ],
             'advertisements' =>[
                 'controller' => 'AdvertisementController',
                 'GET' => 'getAdvertisements',
+                'POST' => 'insertAdvertisement',
+            ],
+            'userAdvertisements' =>[
+                'controller' => 'AdvertisementController',
+                'POST' => 'getUserAdvertisements',
+                'DELETE' => 'deleteUserAdvertisement',
             ],
             'basicAdvertisements' =>[
                 'controller' => 'AdvertisementController',
@@ -49,6 +59,7 @@ class Routing {
             ],
         ];
     }
+
 
     public function run(){
         $fullPath = $_SERVER['REQUEST_URI'];
@@ -61,7 +72,10 @@ class Routing {
 
         if($controller != null && $action != null) {
             $object = new $controller;
-            $object->$action();
+            if($method === 'DELETE')
+                $object->$action($this->getContent());
+            else
+                $object->$action();
         }else{
             $parser = new JsonParser();
             http_response_code(404);
@@ -69,5 +83,15 @@ class Routing {
             echo $parser->writeToJson($error);
 
         }
+    }
+
+    public function getContent()
+    {
+        $content = null;
+        if (0 === strlen(trim($content = file_get_contents('php://input')))) {
+            $content = false;
+        }
+
+        return json_decode($content, true);
     }
 }

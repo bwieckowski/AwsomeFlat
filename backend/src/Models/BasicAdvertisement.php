@@ -2,6 +2,7 @@
 require_once 'Model.php';
 require_once 'Localization.php';
 require_once 'Price.php';
+require_once 'PropertyType.php';
 
 class BasicAdvertisement implements Model {
 
@@ -18,7 +19,7 @@ class BasicAdvertisement implements Model {
         Localization $localization,
         Price $price,
         float $area,
-        string $type
+        PropertyType $type
     )
     {
         $this->id = $id;
@@ -36,6 +37,7 @@ class BasicAdvertisement implements Model {
 
     public function toArray(): array{
         $advertisement = get_object_vars($this);
+        $advertisement['type'] = $this->type->toArray();
         $advertisement['localization'] = $this->localization->toArray();
         $advertisement['price'] = $this->price->toArray();
 

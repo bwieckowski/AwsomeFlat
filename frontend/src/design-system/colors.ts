@@ -4,7 +4,9 @@ export const colors = {
     flat: '#A946BE',
     garage: '#35375A',
     activeGreen: '#52E539',
+    success: '#D4EDDA',
     button: '#76DDF3',
+    buttonDisabled: '#baf5ff',
     buttonHover: '#4DD2F0',
     background:'#EEF4F8',
     dark: '#3D3A3A',
@@ -15,4 +17,5 @@ export const colors = {
     lighterGray: '#BDBDBD',
     lightestGray: '#DADADA',
     white: '#fff'
+
 };

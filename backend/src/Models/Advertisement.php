@@ -1,6 +1,7 @@
 <?php
 require_once 'BasicAdvertisement.php';
 require_once 'User.php';
+require_once 'PropertyType.php';
 
 class Advertisement extends BasicAdvertisement
 {
@@ -29,7 +30,7 @@ class Advertisement extends BasicAdvertisement
                                 Localization $localization,
                                 Price $price,
                                 float $area,
-                                string $type,
+                                PropertyType $type,
                                 BasicUser $user,
                                 array $facilities,
                                 array $images,
@@ -55,10 +56,7 @@ class Advertisement extends BasicAdvertisement
     }
 
     public function toArray(): array{
-        $advertisement = get_object_vars($this);
-        $advertisement['localization'] = $this->localization->toArray();
-        $advertisement['user'] = $this->user->toArray();
-        $advertisement['price'] = $this->price->toArray();
+        $advertisement = parent::toArray();
 
         $results = [];
         foreach ( $this->facilities as $facility) {

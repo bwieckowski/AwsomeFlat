@@ -7,17 +7,21 @@ use Firebase\JWT\JWT;
 
 class ProtectedController extends Controller {
 
-    protected $userEmail;
+    protected $user;
     protected $userRepository;
 
-    function __construct( $jwt ){
+    protected function authenticate( $jwt ){
         $this->userRepository = new UserRepository();
 
-        if($jwt){
+        if(isset($jwt) && $jwt){
             try {
                 $decoded = JWT::decode($jwt, KEY, array('HS256'));
-                $this->userEmail = $decoded->data->email ;
+                $userEmail = $decoded->data->email;
+                $this->user = $this->userRepository->getBasicUserByEmail($userEmail);
+                if(sizeof($this->user) !== 1)
+                    $this->accessDenited();
 
+                $this->user = $this->user[0];
             } catch(Exception $e){
                 $this->accessDenited();
             }

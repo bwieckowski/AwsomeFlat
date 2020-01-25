@@ -1,16 +1,16 @@
 export interface Price {
-   id: number;
+   id?: number;
    price: number;
    areMediaIncluded: boolean;
    commission: number
 }
 
 export interface Localization {
-    id: string
+    id?: string
     longitude: string;
     latitude: string;
     street: string;
-    flatNumber: string;
+    flatNumber?: string;
     streetNumber: string;
     district: string;
     city: string;
@@ -28,6 +28,12 @@ export interface District {
     name: string;
 }
 
+export interface BasicUser {
+    id: string;
+    email: string;
+    firstName: string;
+}
+
 export interface Facility {
     id: string;
     name: string;
@@ -40,12 +46,28 @@ export interface FilterState {
     facilities?: Array<Facility>;
 }
 
+export interface UserPanelAddOffer {
+    facilities?: Array<Facility>;
+    types?: Array<PropertyType>;
+}
+
+export interface UserLogin {
+    user?: BasicUser;
+    jwt?: string;
+}
+
+export interface PropertyType {
+    id: string;
+    name: string;
+    enum: string;
+}
+
 export interface Flat {
     id: number;
     title: string
     localization: Localization;
     price: Price;
-    type: string;
+    type: PropertyType;
     area: number;
     miniPhoto: string;
 

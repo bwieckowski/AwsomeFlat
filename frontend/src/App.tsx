@@ -17,26 +17,32 @@ const routes = [
     {
        path: '/',
        component: V.MapPageView,
+       exact: true,
     },
     {
         path: '/playground',
         component: V.Playground,
+        exact: true,
     },
     {
         path: '/register',
         component: V.RegisterView,
+        exact: true,
     },
     {
         path: '/login',
         component: V.LoginView,
+        exact: true,
     },
     {
         path: '/userPanel',
         component: V.UserPanel,
+        exact: false,
     },
     {
         path: '/logout',
         component: V.Logout,
+        exact: true,
     }
 ];
 
@@ -57,7 +63,7 @@ function App() {
                             key={route.path}
                             path={route.path}
                             component={route.component}
-                            exact={true}
+                            exact={route.exact}
                         />
                     ))}
                 </Router>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components';
 import Input from "design-system/components/Input/Input";
 import RangeInput from "design-system/components/RangeInput/RangeInput";
@@ -7,6 +7,7 @@ import Toggle from "design-system/components/Toggle/Toggle";
 import Filter from "modules/MapPage/Filter/Filter";
 import {colors} from 'design-system';
 import {ApartmentButton, FlatButton, GarageButton, RoomButton} from "../design-system/components/Buttons/Buttons";
+import Message from "../modules/Messages/Messages";
 
 
 const Wrapper = styled.div`
@@ -35,7 +36,11 @@ const dropDownCallback = (item: string) => {
     console.log(item);
 };
 
+
+
 const Playground = () =>{
+
+    const [text, setText] = useState('trololo');
     return (
             <Wrapper>
                 <ApartmentButton />
@@ -49,6 +54,7 @@ const Playground = () =>{
                 <StyledRangeInput  type={"number"} unit={"zł"} />
                 <StyledDropdown onChange={dropDownCallback} optionList={['item1', 'item2', 'item3']} />
                 <StyledToggle onChange={(state) => { console.log(state)}}/>
+                <Message isShow={true} message={text}/>
                 {/*<FlatItem id={1} miniPhoto={img}  type={"Apartament"} title={"Fajne mieszkanko"} price={30} area={12} />*/}
                 <Filter/>
             </Wrapper>

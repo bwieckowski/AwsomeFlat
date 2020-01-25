@@ -18,8 +18,8 @@ export const Box = styled.div`
   margin-right: 5px;
 `;
 
-export const StyledChecked = styled(Checked)<{isChecked: boolean}>`
-  display: ${({isChecked}) => isChecked ? 'block' : 'none'};
+export const StyledChecked = styled(Checked)<{checked: boolean}>`
+  display: ${({checked}) => checked ? 'block' : 'none'};
 `;
 
 export const Label = styled.div``;
